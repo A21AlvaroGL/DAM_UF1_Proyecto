@@ -7,16 +7,16 @@
     <item
         android:id="@+id/uploadFragment"
         android:icon="@drawable/baseline_cloud_upload_24"
-        android:title="Upload"/>
+        android:title="@string/upload_title"/>
 
     <item
         android:id="@+id/soundFragment"
         android:icon="@drawable/baseline_album_24"
-        android:title="Sounds"/>
+        android:title="@string/sounds_title"/>
 
     <item
         android:id="@+id/navigation_favorites"
         android:icon="@drawable/baseline_auto_awesome_24"
-        android:title="Favorites" />
+        android:title="@string/favorites_title" />
 
 </menu>

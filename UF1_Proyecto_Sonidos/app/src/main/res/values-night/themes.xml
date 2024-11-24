@@ -11,6 +11,7 @@
         <item name="android:background">@drawable/purple_violet_gradient</item>
         <item name="itemIconTint">@color/icon_tint_bottom_navigation</item>
         <item name="itemTextColor">@color/icon_tint_bottom_navigation</item>
+        <item name="labelVisibilityMode">selected</item>
     </style>
 
 </resources>
