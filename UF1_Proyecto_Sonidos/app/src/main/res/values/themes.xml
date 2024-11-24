@@ -3,6 +3,15 @@
     <style name="Base.Theme.UF1_Proyecto_Sonidos" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="android:windowBackground">@color/white</item>
+        <item name="bottomNavigationStyle">@style/CustomBottomNavigationView</item>
+    </style>
+
+    <style name="CustomBottomNavigationView" parent="Widget.MaterialComponents.BottomNavigationView">
+        <item name="android:background">@drawable/purple_violet_gradient</item>
+        <item name="itemIconTint">@color/icon_tint_bottom_navigation</item>
+        <item name="itemTextColor">@color/icon_tint_bottom_navigation</item>
+        <item name="labelVisibilityMode">selected</item>
     </style>
 
     <style name="Theme.UF1_Proyecto_Sonidos" parent="Base.Theme.UF1_Proyecto_Sonidos" />
