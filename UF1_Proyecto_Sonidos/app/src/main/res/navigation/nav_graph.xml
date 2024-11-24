@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/soundFragment">
+
+    <fragment
+        android:id="@+id/soundFragment"
+        android:name="com.example.uf1_proyecto_sonidos.SoundFragment"
+        android:label="Sounds" />
+    <fragment
+        android:id="@+id/uploadFragment"
+        android:name="com.example.uf1_proyecto_sonidos.UploadFragment"
+        android:label="Uploads" />
+</navigation>
