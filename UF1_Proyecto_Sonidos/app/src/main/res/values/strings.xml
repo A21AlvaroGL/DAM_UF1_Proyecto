@@ -3,6 +3,9 @@
     <string name="sounds_title">Sounds</string>
     <string name="upload_title">Upload</string>
     <string name="favorites_title">Favorites</string>
-    <string name="sound_effects_title">Sounds Effects</string>
-    <string name="audio_options_title">Audio Options</string>
+    <string name="sound_effects_title">SOUND EFFECTS</string>
+    <string name="audio_options_title">AUDIO OPTIONS</string>
+    <string name="equalizer_title">Equalizer</string>
+    <string name="volume_title">Volume</string>
+    <string name="speed_title">Speed</string>
 </resources>

@@ -8,6 +8,7 @@
     android:orientation="vertical"
     android:gravity="center_horizontal">
 
+    <!--APARTADO DE LOS EFECTOS DE SONIDO-->
     <TextView
         android:id="@+id/sound_effects_title_id"
         android:layout_width="wrap_content"
@@ -26,6 +27,7 @@
         android:background="@drawable/custom_border"
         android:padding="2dp"/>
 
+    <!--APARTADO DE LAS OPCIONES DE AUDIO-->
     <TextView
         android:id="@+id/audio_options_title_id"
         android:layout_width="wrap_content"
@@ -35,20 +37,116 @@
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"/>
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:orientation="vertical"
+        android:layout_height="140dp"
         android:background="@drawable/custom_border">
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="120dp"
+            android:src="@drawable/sound_options_lines"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
+
         <SeekBar
-            android:layout_width="match_parent"
-            android:layout_height="20dp"/>
+            android:id="@+id/equalizer_bar"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:max="100"
+            android:progress="50"
+            android:rotation="270"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.058"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.400" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/equalizer_title"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/equalizer_bar"
+            app:layout_constraintHorizontal_bias="0.467"
+            app:layout_constraintStart_toStartOf="@id/equalizer_bar"
+            app:layout_constraintTop_toBottomOf="@id/equalizer_bar"
+            app:layout_constraintVertical_bias="1.0"
+            android:layout_marginBottom="10dp"/>
+
         <SeekBar
-            android:layout_width="match_parent"
-            android:layout_height="20dp"/>
+            android:id="@+id/volume_bar"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:max="100"
+            android:progress="50"
+            android:rotation="270"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.400" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/volume_title"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/volume_bar"
+            app:layout_constraintStart_toStartOf="@id/volume_bar"
+            app:layout_constraintTop_toBottomOf="@id/volume_bar"
+            app:layout_constraintVertical_bias="1.0"
+            android:layout_marginBottom="10dp"/>
+
         <SeekBar
-            android:layout_width="match_parent"
-            android:layout_height="20dp"/>
-    </LinearLayout>
+            android:id="@+id/speed_bar"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:max="100"
+            android:progress="50"
+            android:rotation="270"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.941"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.400" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/speed_title"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/speed_bar"
+            app:layout_constraintStart_toStartOf="@id/speed_bar"
+            app:layout_constraintTop_toBottomOf="@id/speed_bar"
+            app:layout_constraintVertical_bias="1.0"
+            android:layout_marginBottom="10dp"/>
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="120dp"
+            android:src="@drawable/sound_options_lines"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
 </LinearLayout>
