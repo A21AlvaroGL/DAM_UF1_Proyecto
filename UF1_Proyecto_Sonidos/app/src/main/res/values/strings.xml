@@ -3,4 +3,6 @@
     <string name="sounds_title">Sounds</string>
     <string name="upload_title">Upload</string>
     <string name="favorites_title">Favorites</string>
+    <string name="sound_effects_title">Sounds Effects</string>
+    <string name="audio_options_title">Audio Options</string>
 </resources>
