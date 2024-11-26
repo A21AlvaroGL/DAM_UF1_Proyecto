@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
     entities = [Sound::class, Category::class],
     version = 1
 )
-abstract class SoundDatabase: RoomDatabase() {
+abstract class AppDatabase: RoomDatabase() {
 
     abstract fun soundDAO(): SoundDAO
     abstract fun categoryDAO(): CategoryDAO
