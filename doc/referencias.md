@@ -11,3 +11,5 @@
 - https://stackoverflow.com/questions/3333658/how-to-make-a-vertical-seekbar-in-android
 - https://stackoverflow.com/questions/1598119/is-there-an-easy-way-to-add-a-border-to-the-top-and-bottom-of-an-android-view
 - https://developer.android.com/develop/ui/views/text-and-emoji/fonts-in-xml?hl=es-419
+- https://developer.android.com/develop/ui/views/theming/themes?hl=es-419
+- https://stackoverflow.com/questions/1598119/is-there-an-easy-way-to-add-a-border-to-the-top-and-bottom-of-an-android-view
