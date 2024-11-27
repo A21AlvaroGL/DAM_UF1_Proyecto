@@ -20,7 +20,7 @@ class SoundViewModel (
             when(sortType) {
                 SortType.NAME -> dao.getSoundsOrderedByNameASC()
                 SortType.TIMESTAMP -> dao.getRecentSounds()
-               /* SortType.CATEGORY -> dao.getSoundsByCategory()*/
+                SortType.CATEGORY -> TODO()
             }
         }
     private val _state = MutableStateFlow(SoundState())
