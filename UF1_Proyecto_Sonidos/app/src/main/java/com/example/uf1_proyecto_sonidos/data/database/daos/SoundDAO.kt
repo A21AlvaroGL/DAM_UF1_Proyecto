@@ -1,9 +1,10 @@
-package com.example.uf1_proyecto_sonidos.data.database
+package com.example.uf1_proyecto_sonidos.data.database.daos
 
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Query
 import androidx.room.Upsert
+import com.example.uf1_proyecto_sonidos.data.database.entities.Sound
 import kotlinx.coroutines.flow.Flow
 
 @Dao

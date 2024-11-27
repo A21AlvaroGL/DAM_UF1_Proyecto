@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <style name="CustomBottomNavigationView" parent="Widget.MaterialComponents.BottomNavigationView">
-        <item name="android:background">@drawable/purple_violet_gradient</item>
+        <item name="android:background">@drawable/violet_purple_gradient</item>
         <item name="itemIconTint">@color/icon_tint_bottom_navigation</item>
         <item name="itemTextColor">@color/icon_tint_bottom_navigation</item>
         <item name="labelVisibilityMode">selected</item>

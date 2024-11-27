@@ -9,12 +9,12 @@
     android:gravity="center_horizontal|center_vertical" >
 
     <TextView
-        android:id="@+id/upload_text"
+        android:id="@+id/favorites_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:textSize="20sp"
         android:layout_margin="20dp"
-        android:text="UPLOAD FRAGMENT" />
+        android:text="FAVORITES FRAGMENT" />
 
 </LinearLayout>

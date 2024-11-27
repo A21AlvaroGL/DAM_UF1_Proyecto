@@ -1,4 +1,4 @@
-package com.example.uf1_proyecto_sonidos.data.database
+package com.example.uf1_proyecto_sonidos.data.database.entities
 
 import androidx.room.Entity
 import androidx.room.ForeignKey
