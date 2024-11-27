@@ -14,7 +14,7 @@ interface SoundDAO {
     fun upsertSound(sound: Sound)
 
     @Delete
-    suspend fun deleteContact(sound: Sound)
+    suspend fun deleteSound(sound: Sound)
 
     @Query("SELECT * FROM sounds ORDER BY timestamp DESC")
     fun getRecentSounds(): Flow<List<Sound>>

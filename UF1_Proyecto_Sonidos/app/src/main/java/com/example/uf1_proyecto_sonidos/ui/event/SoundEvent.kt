@@ -10,5 +10,5 @@ sealed interface SoundEvent {
     object showDialog: SoundEvent
     object HideDialog: SoundEvent
     data class SortSounds(val SortType: SortType): SoundEvent
-    data class DeleteContact(val sound: Sound): SoundEvent
+    data class DeleteSound(val sound: Sound): SoundEvent
 }
