@@ -18,3 +18,6 @@
 - https://www.youtube.com/watch?v=bOd3wO0uFr8
 - https://www.daniweb.com/programming/mobile-development/tutorials/537385/android-native-how-to-add-foreign-keys-to-room-entities
 - https://stackoverflow.com/questions/47511750/how-to-use-foreign-key-in-room-persistence-library
+- https://stackoverflow.com/questions/18507351/how-to-create-custom-button-in-android-using-xml-styles
+- https://stackoverflow.com/questions/7690416/android-border-for-button
+- https://stackoverflow.com/questions/65510075/button-style-does-not-work-in-android-studio
