@@ -28,7 +28,7 @@ class CategoryViewModel (
             is CategoryEvent.SaveCategory -> TODO()
             is CategoryEvent.DeleteCategory -> {
                 viewModelScope.launch {
-                    dao.deleteCategory(event.categoryId)
+                    dao.deleteCategory(event.category)
                 }
             }
             is CategoryEvent.SetName -> {

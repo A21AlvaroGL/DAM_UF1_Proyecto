@@ -39,7 +39,7 @@ class SoundViewModel (
             is SoundEvent.SaveSound -> TODO()
             is SoundEvent.DeleteSound -> {
                 viewModelScope.launch {
-                    dao.deleteSound(event.soundId)
+                    dao.deleteSound(event.sound)
                 }
             }
             is SoundEvent.SetFavorite -> {

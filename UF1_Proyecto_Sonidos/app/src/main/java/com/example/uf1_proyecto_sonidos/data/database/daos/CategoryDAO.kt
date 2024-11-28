@@ -14,7 +14,7 @@ interface CategoryDAO {
     fun upsertCategory(category: Category)
 
     @Delete
-    suspend fun deleteCategory(categoryId: Int)
+    suspend fun deleteCategory(category: Category)
 
     @Query("SELECT * FROM categories ORDER BY name ASC")
     fun getCategoriesOrderedByName(): Flow<List<Category>>
