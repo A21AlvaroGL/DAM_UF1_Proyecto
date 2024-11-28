@@ -10,8 +10,10 @@ class SoundsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     val soundButtonText: TextView = itemView.findViewById(R.id.sound_button_text)
 
     fun bind(soundName: String) {
-        soundButtonText.text = soundName
 
+
+        soundButtonText.text = soundName
+        soundButtonText.isSelected = true
         soundButton.setOnClickListener {
 
         }

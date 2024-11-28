@@ -11,7 +11,7 @@ class SoundsAdapter : RecyclerView.Adapter<SoundsViewHolder>() {
     private fun generateSoundsList(num: Int): List<String> {
         val list = mutableListOf<String>()
         for (i in 1..num) {
-            list.add("Sound $i")
+            list.add("Texto para el sonido de prueba $i")
         }
         return list
     }

@@ -24,7 +24,7 @@
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:spanCount="3"
         android:background="@drawable/custom_border"
-        android:padding="2dp"/>
+        android:padding="10dp"/>
 
     <!--APARTADO DE LAS OPCIONES DE AUDIO-->
     <TextView
