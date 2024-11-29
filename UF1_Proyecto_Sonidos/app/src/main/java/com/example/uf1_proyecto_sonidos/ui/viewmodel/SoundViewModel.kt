@@ -6,12 +6,17 @@ import com.example.uf1_proyecto_sonidos.data.database.daos.SoundDAO
 import com.example.uf1_proyecto_sonidos.data.database.entities.Sound
 import com.example.uf1_proyecto_sonidos.ui.SoundSortType
 import com.example.uf1_proyecto_sonidos.ui.event.SoundEvent
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
+@OptIn(ExperimentalCoroutinesApi::class)
 class SoundViewModel (
     private val dao: SoundDAO
 ): ViewModel() {
@@ -32,11 +37,44 @@ class SoundViewModel (
                     }
                 }
             }
-        }
+        }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(), emptyList())
+    val state = combine(_state, _sortType, _sounds) { state, sortType, sounds ->
+         state.copy(
+            sounds = sounds,
+            sortType = sortType
+        )
+    }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), SoundState())
 
     fun onEvent(event: SoundEvent) {
         when(event) {
-            is SoundEvent.SaveSound -> TODO()
+            is SoundEvent.SaveSound -> {
+                val name = state.value.name
+                val path = state.value.path
+                val categoryId = state.value.categoryId
+
+                if (name.isBlank() || path.isBlank()) {
+                    return
+                }
+                
+                val sound = Sound(
+                    name = name,
+                    path = path,
+                    category_id = categoryId
+                )
+
+                viewModelScope.launch {
+                    dao.upsertSound(sound)
+                }
+
+                _state.update {
+                    it.copy(
+                        isAddingSound = false,
+                        name = "",
+                        path = "",
+                        categoryId = null
+                    )
+                }
+            }
             is SoundEvent.DeleteSound -> {
                 viewModelScope.launch {
                     dao.deleteSound(event.sound)

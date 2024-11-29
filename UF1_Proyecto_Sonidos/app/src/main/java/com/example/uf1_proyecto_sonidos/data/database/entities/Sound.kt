@@ -16,7 +16,7 @@ data class Sound (
     val id: Int = 0,
     val name: String,
     val path: String,
-    val favorite: Boolean,
+    val favorite: Boolean = false,
     val timestamp: Long = System.currentTimeMillis(),
     val category_id: Int?
 )
