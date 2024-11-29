@@ -22,3 +22,4 @@
 - https://stackoverflow.com/questions/7690416/android-border-for-button
 - https://stackoverflow.com/questions/65510075/button-style-does-not-work-in-android-studio
 - https://stackoverflow.com/questions/2182578/marquee-text-in-android
+- https://stackoverflow.com/questions/41693154/custom-seekbar-thumb-size-color-and-background

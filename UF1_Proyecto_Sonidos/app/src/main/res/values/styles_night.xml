@@ -28,4 +28,11 @@
         <item name="android:focusable">false</item>
         <item name="android:clickable">true</item>
     </style>
+
+    <style name="customSeekbar" parent="Widget.AppCompat.SeekBar">
+        <item name="android:thumb">@drawable/custom_thumb</item>
+        <item name="android:progressTint">@color/white</item>
+        <item name="android:rotation">270</item>
+    </style>
+
 </resources>
