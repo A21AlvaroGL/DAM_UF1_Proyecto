@@ -27,3 +27,6 @@
 - https://stackoverflow.com/questions/37862021/which-context-to-use-for-toast-in-android
 - https://developer.android.com/codelabs/basic-android-kotlin-compose-persisting-data-room?hl=es-419#6
 - https://developer.android.com/training/data-storage/room?hl=es-419
+- https://developer.android.com/media/implement/playback-app?hl=es-419
+- https://stackoverflow.com/questions/10959554/right-place-for-putting-mp3-files-in-an-android-project
+- https://stackoverflow.com/questions/10849961/speed-control-of-mediaplayer-in-android
