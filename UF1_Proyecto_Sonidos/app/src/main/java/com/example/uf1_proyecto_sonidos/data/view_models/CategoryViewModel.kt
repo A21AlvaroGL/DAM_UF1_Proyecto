@@ -1,11 +1,13 @@
 package com.example.uf1_proyecto_sonidos.data.view_models
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.uf1_proyecto_sonidos.data.database.daos.CategoryDAO
 import com.example.uf1_proyecto_sonidos.data.database.entities.Category
 import com.example.uf1_proyecto_sonidos.data.sort_types.CategorySortType
 import com.example.uf1_proyecto_sonidos.data.events.CategoryEvent
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -21,13 +23,13 @@ class CategoryViewModel (
 ): ViewModel() {
 
     private val _sortType = MutableStateFlow(CategorySortType.NAME)
-    private val _state = MutableStateFlow(CategoryState())
     private val _categories = _sortType
         .flatMapLatest { sortType ->
             when(sortType) {
                 CategorySortType.NAME -> dao.getCategoriesOrderedByName()
             }
         }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(), emptyList())
+    private val _state = MutableStateFlow(CategoryState())
     val state = combine(_state, _sortType, _categories) { state, sortType, categories ->
         state.copy(
             categories = categories,
@@ -38,17 +40,17 @@ class CategoryViewModel (
     fun onEvent(event: CategoryEvent) {
         when(event) {
             is CategoryEvent.SaveCategory -> {
-                val name = state.value.name
+                val name = event.category.name
 
                 if (name.isBlank()) {
                     return
                 }
 
                 val category = Category(
-                    name = name
+                    name = event.category.name
                 )
 
-                viewModelScope.launch {
+                viewModelScope.launch(Dispatchers.IO) {
                     dao.upsertCategory(category)
                 }
 
@@ -58,15 +60,8 @@ class CategoryViewModel (
                 )}
             }
             is CategoryEvent.DeleteCategory -> {
-                viewModelScope.launch {
+                viewModelScope.launch(Dispatchers.IO) {
                     dao.deleteCategory(event.category)
-                }
-            }
-            is CategoryEvent.SetName -> {
-                _state.update {
-                    it.copy(
-                        name = event.name
-                    )
                 }
             }
             is CategoryEvent.SelectCategory -> {
@@ -76,18 +71,16 @@ class CategoryViewModel (
                     )
                 }
             }
-            CategoryEvent.HideCategoryDialog -> {
-                _state.update {
-                    it.copy(
-                        isAddingCategory = false
-                    )
-                }
-            }
-            CategoryEvent.ShowCategoryDialog -> {
-                _state.update {
-                    it.copy(
-                        isAddingCategory = true
-                    )
+            is CategoryEvent.GetAllCategories -> {
+                viewModelScope.launch(Dispatchers.IO) {
+                    dao.getCategoriesOrderedByName()
+                        .collect { categories ->
+                            _state.update {
+                                it.copy(
+                                    categories = categories
+                                )
+                            }
+                        }
                 }
             }
         }

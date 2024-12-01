@@ -11,7 +11,7 @@ import com.example.uf1_proyecto_sonidos.data.database.entities.Sound
 
 @Database(
     entities = [Sound::class, Category::class],
-    version = 1
+    version = 2
 )
 abstract class AppDatabase: RoomDatabase() {
 
@@ -24,7 +24,8 @@ abstract class AppDatabase: RoomDatabase() {
 
         fun getDatabase(context: Context): AppDatabase {
             return Instance ?: synchronized(this) {
-                Room.databaseBuilder(context, AppDatabase::class.java, "item_database")
+                Room.databaseBuilder(context, AppDatabase::class.java, "avisonus")
+                    .fallbackToDestructiveMigration()
                     .build()
                     .also { Instance = it }
             }

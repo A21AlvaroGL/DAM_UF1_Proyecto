@@ -1,10 +1,14 @@
 package com.example.uf1_proyecto_sonidos
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Spinner
@@ -12,12 +16,18 @@ import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import androidx.room.Room
+import androidx.lifecycle.lifecycleScope
 import com.example.uf1_proyecto_sonidos.data.database.AppDatabase
 import com.example.uf1_proyecto_sonidos.data.database.entities.Category
 import com.example.uf1_proyecto_sonidos.data.events.CategoryEvent
 import com.example.uf1_proyecto_sonidos.data.view_models.CategoryViewModel
 import com.example.uf1_proyecto_sonidos.data.view_models.SoundViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -35,11 +45,7 @@ class UploadFragment : Fragment() {
     private var param2: String? = null
 
     private val db by lazy {
-        Room.databaseBuilder(
-            requireContext().applicationContext,
-            AppDatabase::class.java,
-            "avisonus.db"
-        ).build()
+        AppDatabase.getDatabase(requireContext().applicationContext)
     }
 
     private val soundViewModel by viewModels<SoundViewModel>(
@@ -91,6 +97,17 @@ class UploadFragment : Fragment() {
         soundPathButton = view.findViewById(R.id.sound_path_button)
         addSoundButton = view.findViewById(R.id.add_sound_button)
 
+        // Insertar las categorías en el spinner
+        lifecycleScope.launchWhenStarted {
+            categoryViewModel.state.collect { state ->
+                val categories = state.categories
+                // En el adaptador le paso solo el nombre y no el id de la categoría
+                val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, categories.map { it.name })
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                soundCategorySpinner.adapter = adapter
+            }
+        }
+
         addSoundButton.setOnClickListener {
             val soundName = soundNameEditText.text.toString()
             val soundCategory = soundCategorySpinner.selectedItem
@@ -138,4 +155,5 @@ class UploadFragment : Fragment() {
                 }
             }
     }
+
 }
