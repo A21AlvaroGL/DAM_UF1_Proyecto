@@ -1,7 +1,7 @@
-package com.example.uf1_proyecto_sonidos.ui.viewmodel
+package com.example.uf1_proyecto_sonidos.data.view_models
 
 import com.example.uf1_proyecto_sonidos.data.database.entities.Sound
-import com.example.uf1_proyecto_sonidos.ui.SoundSortType
+import com.example.uf1_proyecto_sonidos.data.sort_types.SoundSortType
 
 data class SoundState (
     val sounds: List<Sound> = emptyList(),

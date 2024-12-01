@@ -1,8 +1,9 @@
-package com.example.uf1_proyecto_sonidos
+package com.example.uf1_proyecto_sonidos.ui.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.uf1_proyecto_sonidos.R
 
 class SoundsAdapter : RecyclerView.Adapter<SoundsViewHolder>() {
     private val soundsList: List<String> = generateSoundsList(50)

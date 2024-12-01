@@ -1,4 +1,4 @@
-package com.example.uf1_proyecto_sonidos.ui.event
+package com.example.uf1_proyecto_sonidos.data.events
 
 import com.example.uf1_proyecto_sonidos.data.database.entities.Category
 

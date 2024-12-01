@@ -23,3 +23,7 @@
 - https://stackoverflow.com/questions/65510075/button-style-does-not-work-in-android-studio
 - https://stackoverflow.com/questions/2182578/marquee-text-in-android
 - https://stackoverflow.com/questions/41693154/custom-seekbar-thumb-size-color-and-background
+- https://developer.android.com/guide/topics/ui/notifiers/toasts?hl=es-419
+- https://stackoverflow.com/questions/37862021/which-context-to-use-for-toast-in-android
+- https://developer.android.com/codelabs/basic-android-kotlin-compose-persisting-data-room?hl=es-419#6
+- https://developer.android.com/training/data-storage/room?hl=es-419

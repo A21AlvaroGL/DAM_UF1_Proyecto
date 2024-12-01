@@ -1,11 +1,11 @@
-package com.example.uf1_proyecto_sonidos.ui.viewmodel
+package com.example.uf1_proyecto_sonidos.data.view_models
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.uf1_proyecto_sonidos.data.database.daos.SoundDAO
 import com.example.uf1_proyecto_sonidos.data.database.entities.Sound
-import com.example.uf1_proyecto_sonidos.ui.SoundSortType
-import com.example.uf1_proyecto_sonidos.ui.event.SoundEvent
+import com.example.uf1_proyecto_sonidos.data.sort_types.SoundSortType
+import com.example.uf1_proyecto_sonidos.data.events.SoundEvent
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted

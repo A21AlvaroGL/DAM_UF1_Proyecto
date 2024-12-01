@@ -6,15 +6,109 @@
     android:layout_height="match_parent"
     android:layout_margin="10dp"
     android:orientation="vertical"
-    android:gravity="center_horizontal|center_vertical" >
+    android:gravity="center" >
 
     <TextView
-        android:id="@+id/upload_text"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
-        android:textSize="20sp"
-        android:layout_margin="20dp"
-        android:text="UPLOAD FRAGMENT" />
+        style="@style/CustomTitlePurple"
+        android:layout_marginBottom="10dp"
+        android:text="@string/upload_song_title"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/custom_border"
+        android:padding="10dp"
+        android:layout_marginBottom="20dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            style="@style/CustomTitle"
+            android:text="@string/name_title" />
+
+        <EditText
+            android:id="@+id/sound_name_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/sound_name_hint"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            style="@style/CustomTitle"
+            android:text="@string/category_title"
+            android:layout_marginTop="10dp"/>
+
+        <Spinner
+            android:id="@+id/sound_category_spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            style="@style/CustomTitle"
+            android:text="@string/path_title"
+            android:layout_marginTop="10dp"/>
+
+        <Button
+            android:id="@+id/sound_path_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:layout_gravity="start"/>
+
+        <Button
+            android:id="@+id/add_sound_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/add_sound_button_title"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"/>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        style="@style/CustomTitlePurple"
+        android:layout_margin="10dp"
+        android:text="@string/upload_category_title"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="10dp"
+        android:background="@drawable/custom_border">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            style="@style/CustomTitle"
+            android:text="@string/name_title"/>
+
+        <EditText
+            android:id="@+id/category_name_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/category_name_hint"/>
+
+        <Button
+            android:id="@+id/add_category_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/add_category_button_title"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"/>
+    </LinearLayout>
 
 </LinearLayout>

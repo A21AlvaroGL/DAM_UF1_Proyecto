@@ -1,11 +1,11 @@
-package com.example.uf1_proyecto_sonidos.ui.viewmodel
+package com.example.uf1_proyecto_sonidos.data.view_models
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.uf1_proyecto_sonidos.data.database.daos.CategoryDAO
 import com.example.uf1_proyecto_sonidos.data.database.entities.Category
-import com.example.uf1_proyecto_sonidos.ui.CategorySortType
-import com.example.uf1_proyecto_sonidos.ui.event.CategoryEvent
+import com.example.uf1_proyecto_sonidos.data.sort_types.CategorySortType
+import com.example.uf1_proyecto_sonidos.data.events.CategoryEvent
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -69,7 +69,13 @@ class CategoryViewModel (
                     )
                 }
             }
-            is CategoryEvent.SelectCategory -> TODO()
+            is CategoryEvent.SelectCategory -> {
+                _state.update {
+                    it.copy(
+                        selectedCategoryId = event.categoryId
+                    )
+                }
+            }
             CategoryEvent.HideCategoryDialog -> {
                 _state.update {
                     it.copy(

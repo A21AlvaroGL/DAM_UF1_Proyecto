@@ -1,7 +1,7 @@
-package com.example.uf1_proyecto_sonidos.ui.event
+package com.example.uf1_proyecto_sonidos.data.events
 
 import com.example.uf1_proyecto_sonidos.data.database.entities.Sound
-import com.example.uf1_proyecto_sonidos.ui.SoundSortType
+import com.example.uf1_proyecto_sonidos.data.sort_types.SoundSortType
 
 sealed interface SoundEvent {
     data class SaveSound(val sound: Sound): SoundEvent

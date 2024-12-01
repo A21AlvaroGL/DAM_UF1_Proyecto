@@ -5,7 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_margin="10dp"
     android:orientation="vertical"
-    android:gravity="center_horizontal|center_vertical"
+    android:gravity="center"
     android:layout_gravity="center_vertical">
 
     <!--APARTADO DE LOS EFECTOS DE SONIDO-->
@@ -39,8 +39,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="140dp"
-        android:background="@drawable/custom_border"
-        android:layout_marginBottom="10dp">
+        android:background="@drawable/custom_border">
 
         <ImageView
             android:layout_width="30dp"
