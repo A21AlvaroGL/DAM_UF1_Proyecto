@@ -24,17 +24,17 @@ class SoundsViewHolder(soundButtonView: View, soundFragmentView: View) : Recycle
     val soundButton: Button = soundButtonView.findViewById(R.id.sound_button)
     val soundButtonText: TextView = soundButtonView.findViewById(R.id.sound_button_text)
 
-    fun bind(sound: Sound, speed: Float) {
+    fun bind(sound: Sound, speed: Float, volume: Float) {
         soundButtonText.text = sound.name
         soundButtonText.isSelected = true
 
         soundButton.setOnClickListener {
             val uri = Uri.parse(sound.path)
-            playSound(uri, speed)
+            playSound(uri, speed, volume)
         }
     }
 
-    private fun playSound(uri: Uri, speed: Float) {
+    private fun playSound(uri: Uri, speed: Float, volume: Float) {
         val context = itemView.context
 
         ensureUriPermissions(context, uri)
@@ -59,9 +59,10 @@ class SoundsViewHolder(soundButtonView: View, soundFragmentView: View) : Recycle
                     }
                     soundButton.setBackgroundResource(R.drawable.custom_sound_button_not_pressed)
                 }
-
-                // Configurar la velocidad del sonido (opcional)
+                Log.e("SoundsViewHolder", "VOLUMEEEEEEEEEEEEEEEEEEEEEEEEEEEN $volume")
+                // Configurar la velocidad y el volumen del sonido
                 mediaPlayer.playbackParams = mediaPlayer.playbackParams.setSpeed(speed)
+                mediaPlayer.setVolume(volume, volume)
             } else {
                 Log.e("SoundsViewHolder", "Failed to open AssetFileDescriptor for URI: $uri")
             }

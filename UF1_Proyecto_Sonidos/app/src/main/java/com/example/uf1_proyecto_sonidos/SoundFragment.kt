@@ -58,6 +58,7 @@ class SoundFragment : Fragment() {
     private lateinit var soundsAdapter: SoundsAdapter
     private lateinit var soundsRecyclerView: RecyclerView
     private lateinit var speedSlider: Slider
+    private lateinit var volumeSlider: Slider
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -83,10 +84,15 @@ class SoundFragment : Fragment() {
             }
         }
 
-        // Aquí paso la velocidad, cada vez que se modifica, del slider al adaptador de la recycler view
+        // Aquí paso la velocidad y el volumen, cada vez que se modifican, del slider al adaptador de la recycler view
         speedSlider = view.findViewById(R.id.speed_bar)
         speedSlider.addOnChangeListener { slider, value, fromUser ->
             soundsAdapter.updateSpeed(value)
+        }
+
+        volumeSlider = view.findViewById(R.id.volume_bar)
+        volumeSlider.addOnChangeListener { slider, value, fromUser ->
+            soundsAdapter.updateVolume(value)
         }
 
         return view

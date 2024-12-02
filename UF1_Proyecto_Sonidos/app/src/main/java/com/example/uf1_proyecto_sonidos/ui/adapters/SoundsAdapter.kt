@@ -9,6 +9,7 @@ import com.example.uf1_proyecto_sonidos.data.database.entities.Sound
 class SoundsAdapter() : RecyclerView.Adapter<SoundsViewHolder>() {
     private var soundsList = mutableListOf<Sound>()
     private var speed: Float = 1.0f
+    private var volume: Float = 1.0f
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SoundsViewHolder {
         val context = parent.context
@@ -24,7 +25,7 @@ class SoundsAdapter() : RecyclerView.Adapter<SoundsViewHolder>() {
 
     override fun onBindViewHolder(holder: SoundsViewHolder, position: Int) {
         val sound = soundsList[position]
-        holder.bind(sound, speed)
+        holder.bind(sound, speed, volume)
     }
 
     fun updateSounds(newSounds: List<Sound>) {
@@ -35,6 +36,11 @@ class SoundsAdapter() : RecyclerView.Adapter<SoundsViewHolder>() {
 
     fun updateSpeed(speed: Float) {
         this.speed = speed
+        notifyDataSetChanged()
+    }
+
+    fun updateVolume(volume: Float) {
+        this.volume = volume
         notifyDataSetChanged()
     }
 }
