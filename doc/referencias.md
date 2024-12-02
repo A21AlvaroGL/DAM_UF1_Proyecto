@@ -30,3 +30,4 @@
 - https://developer.android.com/media/implement/playback-app?hl=es-419
 - https://stackoverflow.com/questions/10959554/right-place-for-putting-mp3-files-in-an-android-project
 - https://stackoverflow.com/questions/10849961/speed-control-of-mediaplayer-in-android
+- https://developer.android.com/training/data-storage/shared/documents-files?hl=es-419#kotlin

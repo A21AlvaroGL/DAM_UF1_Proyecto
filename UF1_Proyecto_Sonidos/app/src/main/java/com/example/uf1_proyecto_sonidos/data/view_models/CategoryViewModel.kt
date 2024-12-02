@@ -50,12 +50,12 @@ class CategoryViewModel (
                     name = event.category.name
                 )
 
+                // Es necesario usar Dispatchers porque si no la inserción se hace en el hilo principal y da un error
                 viewModelScope.launch(Dispatchers.IO) {
                     dao.upsertCategory(category)
                 }
 
                 _state.update { it.copy(
-                    isAddingCategory = false,
                     name = ""
                 )}
             }

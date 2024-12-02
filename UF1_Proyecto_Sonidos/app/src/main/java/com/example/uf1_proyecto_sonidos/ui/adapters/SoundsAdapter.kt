@@ -4,18 +4,10 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.uf1_proyecto_sonidos.R
+import com.example.uf1_proyecto_sonidos.data.database.entities.Sound
 
-class SoundsAdapter : RecyclerView.Adapter<SoundsViewHolder>() {
-    private val soundsList: List<String> = generateSoundsList(50)
-
-    // Este método solo sirve para generar una lista de prueba con 50 elementos mientras no creo la base de datos
-    private fun generateSoundsList(num: Int): List<String> {
-        val list = mutableListOf<String>()
-        for (i in 1..num) {
-            list.add("Texto para el sonido de prueba $i")
-        }
-        return list
-    }
+class SoundsAdapter(private var soundList: List<Sound>) : RecyclerView.Adapter<SoundsViewHolder>() {
+    private var soundsList = mutableListOf<Sound>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SoundsViewHolder {
         val context = parent.context
@@ -29,7 +21,13 @@ class SoundsAdapter : RecyclerView.Adapter<SoundsViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: SoundsViewHolder, position: Int) {
-        val soundName = soundsList[position]
-        holder.bind(soundName)
+        val sound = soundsList[position]
+        holder.bind(sound)
+    }
+
+    fun updateSounds(newSounds: List<Sound>) {
+        soundsList.clear()
+        soundsList.addAll(newSounds)
+        notifyDataSetChanged()
     }
 }

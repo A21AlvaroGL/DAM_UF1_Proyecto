@@ -5,7 +5,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
+import com.example.uf1_proyecto_sonidos.data.database.AppDatabase
+import com.example.uf1_proyecto_sonidos.data.view_models.CategoryViewModel
+import com.example.uf1_proyecto_sonidos.data.view_models.SoundViewModel
 import com.example.uf1_proyecto_sonidos.ui.adapters.SoundsAdapter
 
 // TODO: Rename parameter arguments, choose names that match
@@ -23,8 +30,33 @@ class SoundFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
-    private lateinit var soundsRecyclerView: RecyclerView
+    private val db by lazy {
+        AppDatabase.getDatabase(requireContext().applicationContext)
+    }
+
+    private val soundViewModel by viewModels<SoundViewModel>(
+        factoryProducer = {
+            object : ViewModelProvider.Factory {
+                override fun <T : ViewModel> create(modelClass: Class<T>): T {
+                    return SoundViewModel(db.soundDAO()) as T
+                }
+            }
+        }
+    )
+
+    private val categoryViewModel by viewModels<CategoryViewModel>(
+        factoryProducer = {
+            object : ViewModelProvider.Factory {
+                override fun <T : ViewModel> create(modelClass: Class<T>): T {
+                    return CategoryViewModel(db.categoryDAO()) as T
+                }
+            }
+        }
+    )
+
     private lateinit var soundsAdapter: SoundsAdapter
+    private lateinit var soundsRecyclerView: RecyclerView
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,8 +72,14 @@ class SoundFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_sound, container, false)
         soundsRecyclerView = view.findViewById<RecyclerView>(R.id.sounds_recycler)
-        soundsAdapter = SoundsAdapter()
+        soundsAdapter = SoundsAdapter(emptyList())
         soundsRecyclerView.adapter = soundsAdapter
+
+        lifecycleScope.launchWhenStarted {
+            soundViewModel.state.collect { state ->
+                soundsAdapter.updateSounds(state.sounds)
+            }
+        }
 
         return view
     }

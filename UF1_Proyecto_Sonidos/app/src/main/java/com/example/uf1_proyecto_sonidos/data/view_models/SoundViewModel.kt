@@ -6,6 +6,7 @@ import com.example.uf1_proyecto_sonidos.data.database.daos.SoundDAO
 import com.example.uf1_proyecto_sonidos.data.database.entities.Sound
 import com.example.uf1_proyecto_sonidos.data.sort_types.SoundSortType
 import com.example.uf1_proyecto_sonidos.data.events.SoundEvent
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -48,12 +49,14 @@ class SoundViewModel (
     fun onEvent(event: SoundEvent) {
         when(event) {
             is SoundEvent.SaveSound -> {
-                val name = state.value.name
-                val path = state.value.path
-                val categoryId = state.value.categoryId
+                val name = event.sound.name
+                val path = event.sound.path
+                val categoryId = event.sound.category_id
 
-                if (name.isBlank() || path.isBlank()) {
-                    return
+                if (categoryId != null) {
+                    if (name.isBlank() || path.isBlank() || categoryId <= 0 ) {
+                        return
+                    }
                 }
                 
                 val sound = Sound(
@@ -62,13 +65,13 @@ class SoundViewModel (
                     category_id = categoryId
                 )
 
-                viewModelScope.launch {
+                // Es necesario usar Dispatchers porque si no la inserción se hace en el hilo principal y da un error
+                viewModelScope.launch(Dispatchers.IO) {
                     dao.upsertSound(sound)
                 }
 
                 _state.update {
                     it.copy(
-                        isAddingSound = false,
                         name = "",
                         path = "",
                         categoryId = null
@@ -84,25 +87,6 @@ class SoundViewModel (
                 _state.update {
                     it.copy(
                         favorite = event.favorite
-                    )
-                }
-            }
-            is SoundEvent.SetName -> {
-                _state.update {
-                    it.copy(
-                        name = event.name
-                    )
-                }
-            }
-            is SoundEvent.HideDialog -> {
-                _state.update { it.copy(
-                    isAddingSound = false
-                ) }
-            }
-            SoundEvent.ShowDialog -> {
-                _state.update {
-                    it.copy(
-                        isAddingSound = true
                     )
                 }
             }

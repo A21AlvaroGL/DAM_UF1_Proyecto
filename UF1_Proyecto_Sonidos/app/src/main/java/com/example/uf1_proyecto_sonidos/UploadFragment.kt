@@ -1,5 +1,8 @@
 package com.example.uf1_proyecto_sonidos
 
+import android.app.Activity
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -19,15 +22,11 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.example.uf1_proyecto_sonidos.data.database.AppDatabase
 import com.example.uf1_proyecto_sonidos.data.database.entities.Category
+import com.example.uf1_proyecto_sonidos.data.database.entities.Sound
 import com.example.uf1_proyecto_sonidos.data.events.CategoryEvent
+import com.example.uf1_proyecto_sonidos.data.events.SoundEvent
 import com.example.uf1_proyecto_sonidos.data.view_models.CategoryViewModel
 import com.example.uf1_proyecto_sonidos.data.view_models.SoundViewModel
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -73,6 +72,10 @@ class UploadFragment : Fragment() {
     private lateinit var soundCategorySpinner: Spinner
     private lateinit var soundPathButton: Button
     private lateinit var addSoundButton: Button
+    private lateinit var  soundPath: String
+    companion object {
+        private const val PICK_SOUND_FILE = 2
+    }
 
     private lateinit var categoryNameEditText: EditText
     private lateinit var addCategoryButton: Button
@@ -108,9 +111,38 @@ class UploadFragment : Fragment() {
             }
         }
 
+        soundPathButton.setOnClickListener {
+            openFile()
+        }
+
         addSoundButton.setOnClickListener {
             val soundName = soundNameEditText.text.toString()
             val soundCategory = soundCategorySpinner.selectedItem
+            val selectedCategoryPosition = soundCategorySpinner.selectedItemPosition
+            val categories = categoryViewModel.state.value.categories
+
+            if (soundName.isNotBlank() && selectedCategoryPosition >= 0 && ::soundPath.isInitialized && soundPath.isNotBlank()) {
+                if (categories.isNotEmpty()) {
+                    val selectedCategory = categories[selectedCategoryPosition]
+                    val soundCategoryId = selectedCategory.id
+
+                    soundViewModel.onEvent(
+                        SoundEvent.SaveSound(
+                            Sound(
+                                name = soundName,
+                                path = soundPath,
+                                category_id = soundCategoryId
+                            )
+                        )
+                    )
+                }
+                Toast.makeText(activity, getString(R.string.data_uploaded_toast), Toast.LENGTH_SHORT).show()
+                categoryNameEditText.text.clear()
+                Toast.makeText(activity, getString(R.string.data_uploaded_toast), Toast.LENGTH_SHORT).show()
+                categoryNameEditText.text.clear()
+            } else {
+                Toast.makeText(activity, getString(R.string.empty_data_toast), Toast.LENGTH_SHORT).show()
+            }
         }
 
         // Formulario de añadir acategoría
@@ -136,24 +168,31 @@ class UploadFragment : Fragment() {
         return view;
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment UploadFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            UploadFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    fun openFile() {
+        val intent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
+            addCategory(Intent.CATEGORY_OPENABLE)
+            type = "audio/*"
+            putExtra(Intent.EXTRA_MIME_TYPES, arrayOf("audio/mpeg"))
+        }
+        startActivityForResult(intent, PICK_SOUND_FILE)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == PICK_SOUND_FILE && resultCode == Activity.RESULT_OK) {
+            data?.data?.let { uri ->
+                soundPath = uri.toString()
+
+                val resolver = requireContext().contentResolver
+                val flags = Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_GRANT_WRITE_URI_PERMISSION
+                try {
+                    resolver.takePersistableUriPermission(uri, flags)
+                } catch (e: Exception) {
+                    Log.e("UploadFragment", "Unable to take URI permission: $uri", e)
                 }
             }
+        }
     }
 
 }

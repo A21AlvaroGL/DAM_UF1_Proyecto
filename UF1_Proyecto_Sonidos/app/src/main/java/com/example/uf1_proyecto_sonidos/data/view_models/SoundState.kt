@@ -8,7 +8,6 @@ data class SoundState (
     val name: String = "",
     val path: String = "",
     val favorite: Boolean = false,
-    val isAddingSound: Boolean = false,
     val sortType: SoundSortType = SoundSortType.NAME,
     val categoryId: Int? = null
 )
