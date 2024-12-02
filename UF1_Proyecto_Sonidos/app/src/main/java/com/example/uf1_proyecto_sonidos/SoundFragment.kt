@@ -14,6 +14,7 @@ import com.example.uf1_proyecto_sonidos.data.database.AppDatabase
 import com.example.uf1_proyecto_sonidos.data.view_models.CategoryViewModel
 import com.example.uf1_proyecto_sonidos.data.view_models.SoundViewModel
 import com.example.uf1_proyecto_sonidos.ui.adapters.SoundsAdapter
+import com.google.android.material.slider.Slider
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -56,6 +57,7 @@ class SoundFragment : Fragment() {
 
     private lateinit var soundsAdapter: SoundsAdapter
     private lateinit var soundsRecyclerView: RecyclerView
+    private lateinit var speedSlider: Slider
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -72,7 +74,7 @@ class SoundFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_sound, container, false)
         soundsRecyclerView = view.findViewById<RecyclerView>(R.id.sounds_recycler)
-        soundsAdapter = SoundsAdapter(emptyList())
+        soundsAdapter = SoundsAdapter()
         soundsRecyclerView.adapter = soundsAdapter
 
         lifecycleScope.launchWhenStarted {
@@ -81,8 +83,15 @@ class SoundFragment : Fragment() {
             }
         }
 
+        // Aquí paso la velocidad, cada vez que se modifica, del slider al adaptador de la recycler view
+        speedSlider = view.findViewById(R.id.speed_bar)
+        speedSlider.addOnChangeListener { slider, value, fromUser ->
+            soundsAdapter.updateSpeed(value)
+        }
+
         return view
     }
+
 
     companion object {
         /**

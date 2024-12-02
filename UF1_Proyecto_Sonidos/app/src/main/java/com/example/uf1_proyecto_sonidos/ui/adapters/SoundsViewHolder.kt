@@ -7,32 +7,34 @@ import android.net.Uri
 import android.util.Log
 import android.view.View
 import android.widget.Button
+import android.widget.SeekBar
 import android.widget.TextView
 import androidx.core.app.ActivityCompat.startActivityForResult
 import androidx.recyclerview.widget.RecyclerView
 import com.example.uf1_proyecto_sonidos.R
 import com.example.uf1_proyecto_sonidos.data.database.entities.Sound
+import com.google.android.material.slider.Slider
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.io.FileDescriptor
 
-class SoundsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-    val soundButton: Button = itemView.findViewById(R.id.sound_button)
-    val soundButtonText: TextView = itemView.findViewById(R.id.sound_button_text)
+class SoundsViewHolder(soundButtonView: View, soundFragmentView: View) : RecyclerView.ViewHolder(soundButtonView) {
+    val soundButton: Button = soundButtonView.findViewById(R.id.sound_button)
+    val soundButtonText: TextView = soundButtonView.findViewById(R.id.sound_button_text)
 
-    fun bind(sound: Sound) {
+    fun bind(sound: Sound, speed: Float) {
         soundButtonText.text = sound.name
         soundButtonText.isSelected = true
 
         soundButton.setOnClickListener {
             val uri = Uri.parse(sound.path)
-            playSound(uri)
+            playSound(uri, speed)
         }
     }
 
-    private fun playSound(uri: Uri) {
+    private fun playSound(uri: Uri, speed: Float) {
         val context = itemView.context
 
         ensureUriPermissions(context, uri)
@@ -59,7 +61,7 @@ class SoundsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
                 }
 
                 // Configurar la velocidad del sonido (opcional)
-                mediaPlayer.playbackParams = mediaPlayer.playbackParams.setSpeed(1f)
+                mediaPlayer.playbackParams = mediaPlayer.playbackParams.setSpeed(speed)
             } else {
                 Log.e("SoundsViewHolder", "Failed to open AssetFileDescriptor for URI: $uri")
             }
