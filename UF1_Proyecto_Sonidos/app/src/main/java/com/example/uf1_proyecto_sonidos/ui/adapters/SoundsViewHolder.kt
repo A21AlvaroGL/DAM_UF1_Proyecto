@@ -12,6 +12,10 @@ import androidx.core.app.ActivityCompat.startActivityForResult
 import androidx.recyclerview.widget.RecyclerView
 import com.example.uf1_proyecto_sonidos.R
 import com.example.uf1_proyecto_sonidos.data.database.entities.Sound
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import java.io.FileDescriptor
 
 class SoundsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -43,6 +47,16 @@ class SoundsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
                 mediaPlayer.setDataSource(assetFileDescriptor.fileDescriptor)
                 mediaPlayer.prepare()
                 mediaPlayer.start()
+
+                // Hacer que el botón tenga un estilo diferente miestras el sonido se reproduce
+                // para mejorar el rendimiento uso una corrutina que evita que se ejecute en el hilo principal
+                CoroutineScope(Dispatchers.Main).launch {
+                    while (mediaPlayer.isPlaying) {
+                        soundButton.setBackgroundResource(R.drawable.custom_sound_button_pressed)
+                        delay(100)
+                    }
+                    soundButton.setBackgroundResource(R.drawable.custom_sound_button_not_pressed)
+                }
 
                 // Configurar la velocidad del sonido (opcional)
                 mediaPlayer.playbackParams = mediaPlayer.playbackParams.setSpeed(1f)
