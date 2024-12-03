@@ -8,107 +8,197 @@
     android:orientation="vertical"
     android:gravity="center" >
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        style="@style/CustomTitlePurple"
-        android:layout_marginBottom="10dp"
-        android:text="@string/upload_song_title"/>
-
-    <LinearLayout
+    <RadioGroup
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:background="@drawable/custom_border"
-        android:padding="10dp"
-        android:layout_marginBottom="20dp">
+        android:orientation="horizontal"
+        android:gravity="top|center"
+        android:id="@+id/upload_delete_radio_group">
 
+        <RadioButton
+            android:id="@+id/radio_upload"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/upload_title"
+            android:checked="true"/>
+
+        <RadioButton
+            android:id="@+id/radio_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/delete_title" />
+    </RadioGroup>
+
+    <LinearLayout
+        android:id="@+id/upload_forms"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="start"
-            style="@style/CustomTitle"
-            android:text="@string/name_title" />
+            android:gravity="center_horizontal"
+            style="@style/CustomTitlePurple"
+            android:layout_marginBottom="10dp"
+            android:text="@string/upload_song_title"/>
 
-        <EditText
-            android:id="@+id/sound_name_text"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/sound_name_hint"/>
+            android:orientation="vertical"
+            android:background="@drawable/custom_border"
+            android:padding="10dp"
+            android:layout_marginBottom="20dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                style="@style/CustomTitle"
+                android:text="@string/name_title" />
+
+            <EditText
+                android:id="@+id/sound_name_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/sound_name_hint"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                style="@style/CustomTitle"
+                android:text="@string/category_title"
+                android:layout_marginTop="10dp"/>
+
+            <Spinner
+                android:id="@+id/sound_category_spinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                style="@style/CustomTitle"
+                android:text="@string/path_title"
+                android:layout_marginTop="10dp"/>
+
+            <Button
+                android:id="@+id/sound_path_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:layout_gravity="start"/>
+
+            <Button
+                android:id="@+id/add_sound_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/add_sound_button_title"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"/>
+        </LinearLayout>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="start"
-            style="@style/CustomTitle"
-            android:text="@string/category_title"
-            android:layout_marginTop="10dp"/>
+            android:gravity="center_horizontal"
+            style="@style/CustomTitlePurple"
+            android:layout_margin="10dp"
+            android:text="@string/upload_category_title"/>
 
-        <Spinner
-            android:id="@+id/sound_category_spinner"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="start"
-            style="@style/CustomTitle"
-            android:text="@string/path_title"
-            android:layout_marginTop="10dp"/>
+            android:orientation="vertical"
+            android:padding="10dp"
+            android:background="@drawable/custom_border">
 
-        <Button
-            android:id="@+id/sound_path_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text=""
-            android:layout_gravity="start"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                style="@style/CustomTitle"
+                android:text="@string/name_title"/>
 
-        <Button
-            android:id="@+id/add_sound_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/add_sound_button_title"
-            android:layout_gravity="center"
-            android:layout_marginTop="20dp"/>
+            <EditText
+                android:id="@+id/category_name_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/category_name_hint"/>
+
+            <Button
+                android:id="@+id/add_category_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/add_category_button_title"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"/>
+        </LinearLayout>
     </LinearLayout>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        style="@style/CustomTitlePurple"
-        android:layout_margin="10dp"
-        android:text="@string/upload_category_title"/>
-
     <LinearLayout
+        android:id="@+id/delete_forms"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="10dp"
-        android:background="@drawable/custom_border">
+        android:layout_marginBottom="20dp">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="start"
-            style="@style/CustomTitle"
-            android:text="@string/name_title"/>
-
-        <EditText
-            android:id="@+id/category_name_text"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/category_name_hint"/>
+            android:padding="10dp"
+            android:background="@drawable/custom_border"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                style="@style/CustomTitle"
+                android:text="@string/category_title"
+                android:layout_marginTop="10dp"/>
 
-        <Button
-            android:id="@+id/add_category_button"
-            android:layout_width="wrap_content"
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <Button
+                android:id="@+id/delete_sound_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/delete_title"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/add_category_button_title"
-            android:layout_gravity="center"
-            android:layout_marginTop="20dp"/>
+            android:background="@drawable/custom_border"
+            android:padding="10dp"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                style="@style/CustomTitle"
+                android:text="@string/category_title"
+                android:layout_marginTop="10dp"/>
+
+            <Spinner
+                android:id="@+id/delete_category_spinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <Button
+                android:id="@+id/delete_category_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/delete_title"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"/>
+        </LinearLayout>
     </LinearLayout>
 
 </LinearLayout>

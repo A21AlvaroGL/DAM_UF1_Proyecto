@@ -2,6 +2,7 @@
     <string name="app_name">UF1_Proyecto_Sonidos</string>
     <string name="sounds_title">Sounds</string>
     <string name="upload_title">Upload</string>
+    <string name="delete_title">Delete</string>
     <string name="favorites_title">Favorites</string>
     <string name="sound_effects_title">SOUND EFFECTS</string>
     <string name="audio_options_title">AUDIO OPTIONS</string>

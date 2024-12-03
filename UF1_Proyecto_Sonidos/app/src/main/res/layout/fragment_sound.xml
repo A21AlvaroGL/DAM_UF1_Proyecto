@@ -45,10 +45,10 @@
             android:id="@+id/speed_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:stepSize="0.5"
+            android:stepSize="0.25"
             android:value="1.0"
             android:valueFrom="0.0"
-            android:valueTo="3.0"
+            android:valueTo="2.0"
             app:labelBehavior="gone"
             app:thumbColor="@color/violet"
             app:thumbElevation="20dp"
@@ -84,7 +84,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.826"/>
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>

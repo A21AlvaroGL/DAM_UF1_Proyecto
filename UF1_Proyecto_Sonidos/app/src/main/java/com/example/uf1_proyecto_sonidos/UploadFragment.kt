@@ -14,6 +14,8 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
+import android.widget.LinearLayout
+import android.widget.RadioGroup
 import android.widget.Spinner
 import android.widget.Toast
 import androidx.fragment.app.viewModels
@@ -67,9 +69,14 @@ class UploadFragment : Fragment() {
         }
     )
 
+    private lateinit var formRadioGroup: RadioGroup
+    private lateinit var uploadForms: LinearLayout
+    private lateinit var deleteForms: LinearLayout
+
     // Variables que almacenan los datos de los formulario
     private lateinit var soundNameEditText: EditText
     private lateinit var soundCategorySpinner: Spinner
+    private lateinit var deleteCategorySpinner: Spinner
     private lateinit var soundPathButton: Button
     private lateinit var addSoundButton: Button
     private lateinit var  soundPath: String
@@ -93,10 +100,29 @@ class UploadFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_upload, container, false)
+        formRadioGroup = view.findViewById(R.id.upload_delete_radio_group)
+        uploadForms = view.findViewById(R.id.upload_forms)
+        deleteForms = view.findViewById(R.id.delete_forms)
+
+        // Según el valor de los radio buttons muestra unos formularios u otros
+        formRadioGroup.setOnCheckedChangeListener { group, checkedId ->
+            when (checkedId) {
+                R.id.radio_upload -> {
+                    deleteForms.visibility = View.GONE
+                    uploadForms.visibility = View.VISIBLE
+                }
+
+                R.id.radio_delete -> {
+                    uploadForms.visibility = View.GONE
+                    deleteForms.visibility = View.VISIBLE
+                }
+            }
+        }
 
         // Formualrio de subir sonido
         soundNameEditText = view.findViewById(R.id.sound_name_text)
         soundCategorySpinner = view.findViewById(R.id.sound_category_spinner)
+        deleteCategorySpinner = view.findViewById(R.id.delete_category_spinner)
         soundPathButton = view.findViewById(R.id.sound_path_button)
         addSoundButton = view.findViewById(R.id.add_sound_button)
 
@@ -108,6 +134,7 @@ class UploadFragment : Fragment() {
                 val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, categories.map { it.name })
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
                 soundCategorySpinner.adapter = adapter
+                deleteCategorySpinner.adapter = adapter
             }
         }
 
