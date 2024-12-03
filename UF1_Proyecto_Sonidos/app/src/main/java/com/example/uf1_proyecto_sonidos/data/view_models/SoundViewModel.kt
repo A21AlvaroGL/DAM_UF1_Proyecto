@@ -1,5 +1,6 @@
 package com.example.uf1_proyecto_sonidos.data.view_models
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.uf1_proyecto_sonidos.data.database.daos.SoundDAO
@@ -84,8 +85,15 @@ class SoundViewModel (
                 }
             }
             is SoundEvent.DeleteSoundById -> {
-                viewModelScope.launch {
+                Log.d("DeleteSound", "Deleting sound with ID: ${event.id}")
+                Log.d("DeleteSound", "Deleting sound with ID: ${event.id}")
+                Log.d("DeleteSound", "Deleting sound with ID: ${event.id}")
+
+                viewModelScope.launch(Dispatchers.IO) {
                     dao.deleteSoundById(event.id)
+                    Log.d("DeleteSound", "Delete query executed for ID: ${event.id}")
+                    Log.d("DeleteSound", "Delete query executed for ID: ${event.id}")
+                    Log.d("DeleteSound", "Delete query executed for ID: ${event.id}")
                 }
             }
             is SoundEvent.SetFavorite -> {

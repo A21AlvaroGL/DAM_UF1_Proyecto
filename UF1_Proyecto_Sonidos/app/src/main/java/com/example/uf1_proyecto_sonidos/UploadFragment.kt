@@ -2,10 +2,7 @@ package com.example.uf1_proyecto_sonidos
 
 import android.app.Activity
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -45,6 +42,7 @@ class UploadFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
+    // Inicializar la base de datos y los view model
     private val db by lazy {
         AppDatabase.getDatabase(requireContext().applicationContext)
     }
@@ -83,10 +81,11 @@ class UploadFragment : Fragment() {
     companion object {
         private const val PICK_SOUND_FILE = 2
     }
-
     private lateinit var categoryNameEditText: EditText
     private lateinit var addCategoryButton: Button
     private lateinit var deleteCategoryButton: Button
+    private lateinit var deleteSoundButton: Button
+    private lateinit var deleteSoundEditText: EditText
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -114,12 +113,15 @@ class UploadFragment : Fragment() {
         categoryNameEditText = view.findViewById(R.id.category_name_text)
         addCategoryButton = view.findViewById(R.id.add_category_button)
         deleteCategoryButton = view.findViewById(R.id.delete_category_button)
+        deleteSoundButton = view.findViewById(R.id.delete_sound_button)
+        deleteSoundEditText = view.findViewById(R.id.delete_sound_edit_text)
 
         showForms()
         configureSpinner()
         addSound()
         addCategory()
         deleteCategory()
+        deleteSound()
 
         return view
     }
@@ -175,7 +177,7 @@ class UploadFragment : Fragment() {
     }
 
     private fun showForms() {
-        // Configurar el radio group para que muestre uno formularios un otros
+        // Configurar el radio group para que muestre unos formularios u otros
         formRadioGroup.setOnCheckedChangeListener { _, checkedId ->
             when (checkedId) {
                 R.id.radio_upload -> {
@@ -209,7 +211,20 @@ class UploadFragment : Fragment() {
     }
 
     private fun deleteSound() {
+        deleteSoundButton.setOnClickListener {
+            val soundId = deleteSoundEditText.text.toString()
+            if (soundId != null) {
+                if (soundId.isNotBlank()) {
+                    soundViewModel.onEvent(
+                        SoundEvent.DeleteSoundById(soundId.toInt())
+                    )
+                }
+                Toast.makeText(activity, getString(R.string.data_deleted_toast), Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(activity, getString(R.string.empty_data_toast), Toast.LENGTH_SHORT).show()
+            }
 
+        }
     }
 
     private fun deleteCategory() {
