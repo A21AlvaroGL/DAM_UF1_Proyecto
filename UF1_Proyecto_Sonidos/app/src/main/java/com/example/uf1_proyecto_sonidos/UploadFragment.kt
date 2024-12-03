@@ -68,7 +68,7 @@ class UploadFragment : Fragment() {
             }
         }
     )
-
+    // Variables para cambiar entre el tipo de formularios
     private lateinit var formRadioGroup: RadioGroup
     private lateinit var uploadForms: LinearLayout
     private lateinit var deleteForms: LinearLayout
@@ -86,6 +86,7 @@ class UploadFragment : Fragment() {
 
     private lateinit var categoryNameEditText: EditText
     private lateinit var addCategoryButton: Button
+    private lateinit var deleteCategoryButton: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -100,51 +101,53 @@ class UploadFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_upload, container, false)
+
+        // Inicializar las vistas
         formRadioGroup = view.findViewById(R.id.upload_delete_radio_group)
         uploadForms = view.findViewById(R.id.upload_forms)
         deleteForms = view.findViewById(R.id.delete_forms)
-
-        // Según el valor de los radio buttons muestra unos formularios u otros
-        formRadioGroup.setOnCheckedChangeListener { group, checkedId ->
-            when (checkedId) {
-                R.id.radio_upload -> {
-                    deleteForms.visibility = View.GONE
-                    uploadForms.visibility = View.VISIBLE
-                }
-
-                R.id.radio_delete -> {
-                    uploadForms.visibility = View.GONE
-                    deleteForms.visibility = View.VISIBLE
-                }
-            }
-        }
-
-        // Formualrio de subir sonido
         soundNameEditText = view.findViewById(R.id.sound_name_text)
         soundCategorySpinner = view.findViewById(R.id.sound_category_spinner)
         deleteCategorySpinner = view.findViewById(R.id.delete_category_spinner)
         soundPathButton = view.findViewById(R.id.sound_path_button)
         addSoundButton = view.findViewById(R.id.add_sound_button)
+        categoryNameEditText = view.findViewById(R.id.category_name_text)
+        addCategoryButton = view.findViewById(R.id.add_category_button)
+        deleteCategoryButton = view.findViewById(R.id.delete_category_button)
 
-        // Insertar las categorías en el spinner
+        showForms()
+        configureSpinner()
+        addSound()
+        addCategory()
+        deleteCategory()
+
+        return view
+    }
+
+    private fun configureSpinner() {
+        // Configurar el spinner con las categorías
         lifecycleScope.launchWhenStarted {
             categoryViewModel.state.collect { state ->
                 val categories = state.categories
-                // En el adaptador le paso solo el nombre y no el id de la categoría
-                val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, categories.map { it.name })
+                val adapter = ArrayAdapter(
+                    requireContext(),
+                    android.R.layout.simple_spinner_item,
+                    categories.map { it.name }
+                )
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
                 soundCategorySpinner.adapter = adapter
                 deleteCategorySpinner.adapter = adapter
             }
         }
+    }
 
+    private fun addSound() {
         soundPathButton.setOnClickListener {
             openFile()
         }
 
         addSoundButton.setOnClickListener {
             val soundName = soundNameEditText.text.toString()
-            val soundCategory = soundCategorySpinner.selectedItem
             val selectedCategoryPosition = soundCategorySpinner.selectedItemPosition
             val categories = categoryViewModel.state.value.categories
 
@@ -164,18 +167,30 @@ class UploadFragment : Fragment() {
                     )
                 }
                 Toast.makeText(activity, getString(R.string.data_uploaded_toast), Toast.LENGTH_SHORT).show()
-                categoryNameEditText.text.clear()
-                Toast.makeText(activity, getString(R.string.data_uploaded_toast), Toast.LENGTH_SHORT).show()
-                categoryNameEditText.text.clear()
+                soundNameEditText.text.clear()
             } else {
                 Toast.makeText(activity, getString(R.string.empty_data_toast), Toast.LENGTH_SHORT).show()
             }
         }
+    }
 
-        // Formulario de añadir acategoría
-        categoryNameEditText = view.findViewById(R.id.category_name_text)
-        addCategoryButton = view.findViewById(R.id.add_category_button)
+    private fun showForms() {
+        // Configurar el radio group para que muestre uno formularios un otros
+        formRadioGroup.setOnCheckedChangeListener { _, checkedId ->
+            when (checkedId) {
+                R.id.radio_upload -> {
+                    deleteForms.visibility = View.GONE
+                    uploadForms.visibility = View.VISIBLE
+                }
+                R.id.radio_delete -> {
+                    uploadForms.visibility = View.GONE
+                    deleteForms.visibility = View.VISIBLE
+                }
+            }
+        }
+    }
 
+    private fun addCategory() {
         addCategoryButton.setOnClickListener {
             val categoryName = categoryNameEditText.text.toString()
 
@@ -191,8 +206,30 @@ class UploadFragment : Fragment() {
                 Toast.makeText(activity, getString(R.string.empty_data_toast), Toast.LENGTH_SHORT).show()
             }
         }
+    }
 
-        return view;
+    private fun deleteSound() {
+
+    }
+
+    private fun deleteCategory() {
+        deleteCategoryButton.setOnClickListener {
+            val categories = categoryViewModel.state.value.categories
+            val selectedCategoryPosition = deleteCategorySpinner.selectedItemPosition
+
+            if (categories.isNotEmpty() && selectedCategoryPosition >= 0) {
+                val selectedCategory = categories[selectedCategoryPosition]
+
+                categoryViewModel.onEvent(
+                    CategoryEvent.DeleteCategory(
+                        selectedCategory
+                    )
+                )
+                Toast.makeText(activity, getString(R.string.data_deleted_toast), Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(activity, getString(R.string.empty_data_toast), Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
     fun openFile() {
@@ -221,5 +258,4 @@ class UploadFragment : Fragment() {
             }
         }
     }
-
 }

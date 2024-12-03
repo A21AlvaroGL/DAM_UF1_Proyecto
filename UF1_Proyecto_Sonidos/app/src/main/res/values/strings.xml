@@ -19,5 +19,6 @@
     <string name="add_sound_button_title">Upload Sound</string>
     <string name="add_category_button_title">Add Category</string>
     <string name="data_uploaded_toast">Data Uploaded</string>
+    <string name="data_deleted_toast">Deleted Data</string>
     <string name="empty_data_toast">You need to fill in all fields</string>
 </resources>

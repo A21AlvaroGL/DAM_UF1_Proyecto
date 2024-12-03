@@ -83,6 +83,11 @@ class SoundViewModel (
                     dao.deleteSound(event.sound)
                 }
             }
+            is SoundEvent.DeleteSoundById -> {
+                viewModelScope.launch {
+                    dao.deleteSoundById(event.id)
+                }
+            }
             is SoundEvent.SetFavorite -> {
                 _state.update {
                     it.copy(

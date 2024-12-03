@@ -16,6 +16,9 @@ interface SoundDAO {
     @Delete
     suspend fun deleteSound(sound: Sound)
 
+    @Query("DELETE FROM sounds WHERE id = :soundId")
+    suspend fun deleteSoundById(soundId: Int)
+
     @Query("SELECT * FROM sounds ORDER BY timestamp DESC")
     fun getRecentSounds(): Flow<List<Sound>>
 

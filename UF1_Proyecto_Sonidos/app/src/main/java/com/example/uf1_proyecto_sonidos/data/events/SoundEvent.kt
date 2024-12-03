@@ -8,5 +8,6 @@ sealed interface SoundEvent {
     data class SetFavorite(val favorite: Boolean): SoundEvent
     data class SortSounds(val SortType: SoundSortType): SoundEvent
     data class DeleteSound(val sound: Sound): SoundEvent
+    data class DeleteSoundById(val id: Int): SoundEvent
     data class FilterByCategory(val categoryId: Int): SoundEvent
 }
