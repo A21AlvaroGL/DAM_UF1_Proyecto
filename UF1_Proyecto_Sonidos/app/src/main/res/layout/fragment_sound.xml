@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -26,64 +27,137 @@
         android:background="@drawable/custom_border"
         android:padding="10dp"/>
 
-    <!--APARTADO DE LAS OPCIONES DE AUDIO-->
-    <TextView
-        android:id="@+id/audio_options_title_id"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/audio_options_title"
-        style="@style/CustomTitle"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"/>
+    <!--APARTADO DE LAS OPCIONES DE AUDIO Y FILTRADO-->
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="140dp"
-        android:background="@drawable/custom_border">
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp">
 
-        <com.google.android.material.slider.Slider
-            android:id="@+id/speed_bar"
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/audio_options_title_id"
+            style="@style/CustomTitle"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:stepSize="0.25"
-            android:value="1.0"
-            android:valueFrom="0.0"
-            android:valueTo="2.0"
-            app:labelBehavior="gone"
-            app:thumbColor="@color/violet"
-            app:thumbElevation="20dp"
-            app:thumbRadius="13dp"
-            app:thumbStrokeColor="@color/purple"
-            app:thumbStrokeWidth="5dp"
-            app:trackColorActive="@color/white"
+            android:gravity="left"
+            android:text="@string/audio_options_title"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.173"/>
+            app:layout_constraintVertical_bias="0.0" />
 
-        <com.google.android.material.slider.Slider
-            android:id="@+id/volume_bar"
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/filters_title_id"
+            style="@style/CustomTitle"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:stepSize="0.2"
-            android:value="1.0"
-            android:valueFrom="0.0"
-            android:valueTo="1.0"
-            app:labelBehavior="gone"
-            app:thumbColor="@color/violet"
-            app:thumbElevation="20dp"
-            app:thumbRadius="13dp"
-            app:thumbStrokeColor="@color/purple"
-            app:thumbStrokeWidth="5dp"
-            app:trackColorActive="@color/white"
+            android:gravity="right"
+            android:text="@string/filters_title"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.826"/>
-
+            app:layout_constraintVertical_bias="0.0" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="230dp"
+            android:layout_height="140dp"
+            android:background="@drawable/custom_border">
+
+            <com.google.android.material.slider.Slider
+                android:id="@+id/speed_bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:elevation="1dp"
+                android:stepSize="0.25"
+                android:value="1.0"
+                android:valueFrom="0.0"
+                android:valueTo="2.0"
+                app:labelBehavior="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.173"
+                app:thumbColor="@color/violet"
+                app:thumbElevation="20dp"
+                app:thumbRadius="13dp"
+                app:thumbStrokeColor="@color/purple"
+                app:thumbStrokeWidth="5dp"
+                app:trackColorActive="@color/white" />
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:text="@string/speed_title"
+                app:layout_constraintBottom_toBottomOf="@+id/speed_bar"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.033"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.133" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/volume_title"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.087"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView"
+                app:layout_constraintVertical_bias="0.406" />
+
+            <com.google.android.material.slider.Slider
+                android:id="@+id/volume_bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:elevation="1dp"
+                android:stepSize="0.2"
+                android:value="1.0"
+                android:valueFrom="0.0"
+                android:valueTo="1.0"
+                app:labelBehavior="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.826"
+                app:thumbColor="@color/violet"
+                app:thumbElevation="20dp"
+                app:thumbRadius="13dp"
+                app:thumbStrokeColor="@color/purple"
+                app:thumbStrokeWidth="5dp"
+                app:trackColorActive="@color/white" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="140dp"
+            android:background="@drawable/custom_border"
+            android:layout_marginLeft="10dp">
+
+            <Spinner
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
 </LinearLayout>

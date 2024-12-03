@@ -13,20 +13,23 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="top|center"
-        android:id="@+id/upload_delete_radio_group">
+        android:id="@+id/upload_delete_radio_group"
+        >
 
         <RadioButton
             android:id="@+id/radio_upload"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/upload_title"
-            android:checked="true"/>
+            android:checked="true"
+            android:textColor="@color/white"/>
 
         <RadioButton
             android:id="@+id/radio_delete"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/delete_title" />
+            android:text="@string/delete_title"
+            android:textColor="@color/white"/>
     </RadioGroup>
 
 <!--    Formularios de subir sonidos y categorías-->
