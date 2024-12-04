@@ -5,12 +5,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
 import com.example.uf1_proyecto_sonidos.data.database.AppDatabase
+import com.example.uf1_proyecto_sonidos.data.events.SoundEvent
 import com.example.uf1_proyecto_sonidos.data.view_models.CategoryViewModel
 import com.example.uf1_proyecto_sonidos.data.view_models.SoundViewModel
 import com.example.uf1_proyecto_sonidos.ui.adapters.SoundsAdapter
@@ -59,6 +61,7 @@ class SoundFragment : Fragment() {
     private lateinit var soundsRecyclerView: RecyclerView
     private lateinit var speedSlider: Slider
     private lateinit var volumeSlider: Slider
+    private lateinit var filterByCategory: Button
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -77,6 +80,7 @@ class SoundFragment : Fragment() {
         soundsRecyclerView = view.findViewById<RecyclerView>(R.id.sounds_recycler)
         soundsAdapter = SoundsAdapter()
         soundsRecyclerView.adapter = soundsAdapter
+        filterByCategory = view.findViewById(R.id.filter_by_category_button)
 
         lifecycleScope.launchWhenStarted {
             soundViewModel.state.collect { state ->
@@ -93,6 +97,11 @@ class SoundFragment : Fragment() {
         volumeSlider = view.findViewById(R.id.volume_bar)
         volumeSlider.addOnChangeListener { slider, value, fromUser ->
             soundsAdapter.updateVolume(value)
+        }
+
+        filterByCategory.setOnClickListener {
+            val bottomSheet = CategoryBottomSheetFragment()
+            bottomSheet.show(parentFragmentManager, "CategoriesBottomSheet")
         }
 
         return view

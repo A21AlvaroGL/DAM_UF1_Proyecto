@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:spanCount="3"
-        android:background="@drawable/custom_border"
+        android:background="@drawable/violet_purple_gradient"
         android:padding="10dp"/>
 
 </LinearLayout>
