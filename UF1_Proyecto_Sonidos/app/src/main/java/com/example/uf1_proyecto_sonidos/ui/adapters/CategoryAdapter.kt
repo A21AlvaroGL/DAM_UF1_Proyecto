@@ -17,7 +17,7 @@ class CategoryAdapter() : RecyclerView.Adapter<CategoryViewHolder>() {
 
     override fun onBindViewHolder(holder: CategoryViewHolder, position: Int) {
         val category = categoryList[position]
-        holder.categoryRow.text = category.name
+        holder.bind(category)
     }
 
     override fun getItemCount(): Int {

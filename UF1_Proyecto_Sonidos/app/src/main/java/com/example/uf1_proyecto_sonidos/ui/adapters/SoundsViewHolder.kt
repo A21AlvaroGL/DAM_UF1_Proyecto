@@ -7,18 +7,14 @@ import android.net.Uri
 import android.util.Log
 import android.view.View
 import android.widget.Button
-import android.widget.SeekBar
 import android.widget.TextView
-import androidx.core.app.ActivityCompat.startActivityForResult
 import androidx.recyclerview.widget.RecyclerView
 import com.example.uf1_proyecto_sonidos.R
 import com.example.uf1_proyecto_sonidos.data.database.entities.Sound
-import com.google.android.material.slider.Slider
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import java.io.FileDescriptor
 
 class SoundsViewHolder(soundButtonView: View, soundFragmentView: View) : RecyclerView.ViewHolder(soundButtonView) {
     val soundButton: Button = soundButtonView.findViewById(R.id.sound_button)

@@ -85,15 +85,8 @@ class SoundViewModel (
                 }
             }
             is SoundEvent.DeleteSoundById -> {
-                Log.d("DeleteSound", "Deleting sound with ID: ${event.id}")
-                Log.d("DeleteSound", "Deleting sound with ID: ${event.id}")
-                Log.d("DeleteSound", "Deleting sound with ID: ${event.id}")
-
                 viewModelScope.launch(Dispatchers.IO) {
                     dao.deleteSoundById(event.id)
-                    Log.d("DeleteSound", "Delete query executed for ID: ${event.id}")
-                    Log.d("DeleteSound", "Delete query executed for ID: ${event.id}")
-                    Log.d("DeleteSound", "Delete query executed for ID: ${event.id}")
                 }
             }
             is SoundEvent.SetFavorite -> {
@@ -107,7 +100,9 @@ class SoundViewModel (
                 _sortType.value = event.SortType
             }
             is SoundEvent.FilterByCategory -> {
-                _sortType
+                _state.update { currentState ->
+                    currentState.copy(categoryId = event.categoryId)
+                }
             }
         }
     }
