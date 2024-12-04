@@ -23,4 +23,6 @@
     <string name="data_deleted_toast">Deleted Data</string>
     <string name="empty_data_toast">You need to fill in all fields</string>
     <string name="delete_sound_hint">Enter the id…</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
