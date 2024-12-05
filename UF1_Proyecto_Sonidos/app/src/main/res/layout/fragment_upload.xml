@@ -38,14 +38,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            style="@style/CustomTitlePurple"
-            android:layout_marginBottom="10dp"
-            android:text="@string/upload_song_title"/>
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -53,13 +45,20 @@
             android:background="@drawable/custom_border"
             android:padding="10dp"
             android:layout_marginBottom="20dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                style="@style/CustomTitlePurple"
+                android:layout_marginBottom="10dp"
+                android:text="@string/upload_sound_title"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="start"
                 style="@style/CustomTitle"
-                android:text="@string/name_title" />
+                android:text="@string/name_title"/>
 
             <EditText
                 android:id="@+id/sound_name_text"
@@ -80,37 +79,28 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="start"
-                style="@style/CustomTitle"
-                android:text="@string/path_title"
-                android:layout_marginTop="10dp"/>
-
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/sound_path_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=""
+                android:padding="10dp"
+                android:text="@string/path_title"
+                android:textColor="@color/white"
+                android:background="@drawable/custom_form_buttom"
+                android:layout_marginTop="10dp"
                 android:layout_gravity="start"/>
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/add_sound_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:padding="10dp"
                 android:text="@string/add_sound_button_title"
+                android:textColor="@color/white"
+                android:background="@drawable/custom_form_buttom"
                 android:layout_gravity="center"
                 android:layout_marginTop="20dp"/>
         </LinearLayout>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            style="@style/CustomTitlePurple"
-            android:layout_margin="10dp"
-            android:text="@string/upload_category_title"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -120,11 +110,19 @@
             android:background="@drawable/custom_border">
 
             <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                style="@style/CustomTitlePurple"
+                android:text="@string/upload_category_title"/>
+
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="start"
                 style="@style/CustomTitle"
-                android:text="@string/name_title"/>
+                android:text="@string/name_title"
+                android:layout_marginTop="10dp"/>
 
             <EditText
                 android:id="@+id/category_name_text"
@@ -132,11 +130,14 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/category_name_hint"/>
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/add_category_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:padding="10dp"
                 android:text="@string/add_category_button_title"
+                android:textColor="@color/white"
+                android:background="@drawable/custom_form_buttom"
                 android:layout_gravity="center"
                 android:layout_marginTop="20dp"/>
         </LinearLayout>
@@ -156,6 +157,15 @@
             android:padding="10dp"
             android:background="@drawable/custom_border"
             android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                style="@style/CustomTitlePurple"
+                android:layout_marginBottom="10dp"
+                android:text="@string/delete_sound_title"/>
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -170,11 +180,14 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/delete_sound_hint"/>
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/delete_sound_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:padding="2dp"
                 android:text="@string/delete_title"
+                android:textColor="@color/white"
+                android:background="@drawable/custom_form_buttom"
                 android:layout_gravity="center"
                 android:layout_marginTop="20dp"/>
         </LinearLayout>
@@ -183,8 +196,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/custom_border"
+            android:layout_marginTop="20dp"
             android:padding="10dp"
             android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                style="@style/CustomTitlePurple"
+                android:text="@string/delete_category_title"/>
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -198,11 +220,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/delete_category_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:padding="2dp"
                 android:text="@string/delete_title"
+                android:textColor="@color/white"
+                android:background="@drawable/custom_form_buttom"
                 android:layout_gravity="center"
                 android:layout_marginTop="20dp"/>
         </LinearLayout>

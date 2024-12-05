@@ -10,8 +10,10 @@
     <string name="equalizer_title">Equalizer</string>
     <string name="volume_title">Volume</string>
     <string name="speed_title">Speed</string>
-    <string name="upload_song_title">UPLOAD A SOUND</string>
+    <string name="upload_sound_title">UPLOAD A SOUND</string>
+    <string name="delete_sound_title">DELETE A SOUND</string>
     <string name="upload_category_title">ADD A NEW CATEGORY</string>
+    <string name="delete_category_title">DELETE A CATEGORY</string>
     <string name="name_title">Name</string>
     <string name="category_title">Category</string>
     <string name="categories_title">CATEGORIES</string>

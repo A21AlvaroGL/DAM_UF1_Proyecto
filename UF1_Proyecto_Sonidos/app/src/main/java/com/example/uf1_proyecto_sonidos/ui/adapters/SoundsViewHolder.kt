@@ -55,7 +55,6 @@ class SoundsViewHolder(soundButtonView: View, soundFragmentView: View) : Recycle
                     }
                     soundButton.setBackgroundResource(R.drawable.custom_sound_button_not_pressed)
                 }
-                Log.e("SoundsViewHolder", "VOLUMEEEEEEEEEEEEEEEEEEEEEEEEEEEN $volume")
                 // Configurar la velocidad y el volumen del sonido
                 mediaPlayer.playbackParams = mediaPlayer.playbackParams.setSpeed(speed)
                 mediaPlayer.setVolume(volume, volume)
