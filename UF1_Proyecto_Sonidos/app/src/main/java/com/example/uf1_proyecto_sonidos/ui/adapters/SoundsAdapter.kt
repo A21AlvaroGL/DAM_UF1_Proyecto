@@ -1,5 +1,6 @@
 package com.example.uf1_proyecto_sonidos.ui.adapters
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView

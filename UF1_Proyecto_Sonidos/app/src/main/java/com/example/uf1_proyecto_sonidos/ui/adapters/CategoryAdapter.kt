@@ -5,9 +5,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.uf1_proyecto_sonidos.R
 import com.example.uf1_proyecto_sonidos.data.database.entities.Category
-import com.example.uf1_proyecto_sonidos.data.database.entities.Sound
 
-class CategoryAdapter() : RecyclerView.Adapter<CategoryViewHolder>() {
+class CategoryAdapter(
+    // Este es un callback que se ejecuta dentro del click del listener
+    val onClick: (Category) -> Unit
+) : RecyclerView.Adapter<CategoryViewHolder>() {
     private var categoryList = mutableListOf<Category>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder {
@@ -17,7 +19,7 @@ class CategoryAdapter() : RecyclerView.Adapter<CategoryViewHolder>() {
 
     override fun onBindViewHolder(holder: CategoryViewHolder, position: Int) {
         val category = categoryList[position]
-        holder.bind(category)
+        holder.bind(category, onClick)
     }
 
     override fun getItemCount(): Int {

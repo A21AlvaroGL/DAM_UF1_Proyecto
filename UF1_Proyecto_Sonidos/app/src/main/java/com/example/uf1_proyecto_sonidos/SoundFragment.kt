@@ -1,11 +1,13 @@
 package com.example.uf1_proyecto_sonidos
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageButton
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -47,21 +49,11 @@ class SoundFragment : Fragment() {
         }
     )
 
-    private val categoryViewModel by viewModels<CategoryViewModel>(
-        factoryProducer = {
-            object : ViewModelProvider.Factory {
-                override fun <T : ViewModel> create(modelClass: Class<T>): T {
-                    return CategoryViewModel(db.categoryDAO()) as T
-                }
-            }
-        }
-    )
-
     private lateinit var soundsAdapter: SoundsAdapter
     private lateinit var soundsRecyclerView: RecyclerView
     private lateinit var speedSlider: Slider
     private lateinit var volumeSlider: Slider
-    private lateinit var filterByCategory: Button
+    private lateinit var filterByCategory: ImageButton
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -84,6 +76,7 @@ class SoundFragment : Fragment() {
 
         lifecycleScope.launchWhenStarted {
             soundViewModel.state.collect { state ->
+                Log.d("SoundFragment", "State updated with sounds: ${state.sounds.size} items")
                 soundsAdapter.updateSounds(state.sounds)
             }
         }

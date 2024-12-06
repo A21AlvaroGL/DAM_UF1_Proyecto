@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">UF1_Proyecto_Sonidos</string>
+    <string name="sounds_title">Sonidos</string>
+    <string name="upload_title">Subir</string>
+    <string name="delete_title">Borrar</string>
+    <string name="favorites_title">Favoritos</string>
+    <string name="sound_effects_title">EFECTOS DE SONIDO</string>
+    <string name="audio_options_title">OPCIONES DE AUDIO</string>
+    <string name="filters_title">FILTROS</string>
+    <string name="volume_title">Volumen</string>
+    <string name="speed_title">Velocidad</string>
+    <string name="upload_sound_title">SUBE UN SONIDO</string>
+    <string name="delete_sound_title">BORRA UN SONIDO</string>
+    <string name="upload_category_title">AÑADE UNA CATEGORÍA</string>
+    <string name="delete_category_title">BORRA UNA CATEGORÍA</string>
+    <string name="name_title">Nombre</string>
+    <string name="category_title">Categoría</string>
+    <string name="categories_title">CATEGORÍAS</string>
+    <string name="sound_name_hint">Nombre del sonido…</string>
+    <string name="category_name_hint">Nombre de la categoría…</string>
+    <string name="path_title">Selecciona un sonido</string>
+    <string name="add_sound_button_title">Subir sonido</string>
+    <string name="add_category_button_title">Añadir categoría</string>
+    <string name="data_uploaded_toast">Datos subidos</string>
+    <string name="data_deleted_toast">Datos eliminados</string>
+    <string name="empty_data_toast">Necesitas rellenar todos los campos</string>
+    <string name="delete_sound_hint">Introduce el id…</string>
+</resources>

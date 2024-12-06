@@ -22,14 +22,16 @@
             android:layout_height="wrap_content"
             android:text="@string/upload_title"
             android:checked="true"
-            android:textColor="@color/white"/>
+            android:textColor="@color/white"
+            android:buttonTint="@color/violet"/>
 
         <RadioButton
             android:id="@+id/radio_delete"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/delete_title"
-            android:textColor="@color/white"/>
+            android:textColor="@color/white"
+            android:buttonTint="@color/violet"/>
     </RadioGroup>
 
 <!--    Formularios de subir sonidos y categorías-->

@@ -152,10 +152,13 @@
             android:layout_marginStart="10dp"
             android:gravity="center">
 
-            <Button
+            <ImageButton
                 android:id="@+id/filter_by_category_button"
                 android:layout_width="70dp"
-                android:layout_height="70dp"/>
+                android:layout_height="70dp"
+                android:src="@drawable/baseline_filter_list_36"
+                android:background="@drawable/custom_circle_button"
+                android:elevation="20dp"/>
 
         </LinearLayout>
 

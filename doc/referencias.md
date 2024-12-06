@@ -32,3 +32,4 @@
 - https://stackoverflow.com/questions/10849961/speed-control-of-mediaplayer-in-android
 - https://developer.android.com/training/data-storage/shared/documents-files?hl=es-419#kotlin
 - https://stackoverflow.com/questions/9596276/how-to-explain-callbacks-in-plain-english-how-are-they-different-from-calling-o
+- https://es.stackoverflow.com/questions/455819/c%C3%B3mo-enviar-datos-de-un-recyclerview-a-un-fragment

@@ -8,6 +8,7 @@ import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.uf1_proyecto_sonidos.R
 import com.example.uf1_proyecto_sonidos.data.database.entities.Sound
@@ -27,6 +28,12 @@ class SoundsViewHolder(soundButtonView: View, soundFragmentView: View) : Recycle
         soundButton.setOnClickListener {
             val uri = Uri.parse(sound.path)
             playSound(uri, speed, volume)
+        }
+
+        soundButton.setOnLongClickListener {
+            val context = itemView.context
+            Toast.makeText(context, "ID: ${sound.id}", Toast.LENGTH_SHORT).show()
+            true
         }
     }
 

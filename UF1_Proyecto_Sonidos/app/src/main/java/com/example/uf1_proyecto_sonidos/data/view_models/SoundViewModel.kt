@@ -33,13 +33,13 @@ class SoundViewModel (
                 SoundSortType.CATEGORY -> {
                     val categoryId = _state.value.categoryId
                     if (categoryId != null) {
-                        dao.getSoundsByCategory(categoryId)
+                        dao.getSoundsByCategory(14)
                     } else {
-                        flowOf(emptyList<Sound>())
+                        flowOf(emptyList())
                     }
                 }
             }
-        }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(), emptyList())
+        }
     val state = combine(_state, _sortType, _sounds) { state, sortType, sounds ->
          state.copy(
             sounds = sounds,
@@ -59,7 +59,7 @@ class SoundViewModel (
                         return
                     }
                 }
-                
+
                 val sound = Sound(
                     name = name,
                     path = path,
@@ -100,6 +100,8 @@ class SoundViewModel (
                 _sortType.value = event.SortType
             }
             is SoundEvent.FilterByCategory -> {
+                _sortType.value = SoundSortType.CATEGORY
+
                 _state.update { currentState ->
                     currentState.copy(categoryId = event.categoryId)
                 }

@@ -1,6 +1,7 @@
 package com.example.uf1_proyecto_sonidos
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -12,7 +13,10 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.uf1_proyecto_sonidos.data.database.AppDatabase
+import com.example.uf1_proyecto_sonidos.data.events.SoundEvent
+import com.example.uf1_proyecto_sonidos.data.sort_types.SoundSortType
 import com.example.uf1_proyecto_sonidos.data.view_models.CategoryViewModel
+import com.example.uf1_proyecto_sonidos.data.view_models.SoundViewModel
 import com.example.uf1_proyecto_sonidos.ui.adapters.CategoryAdapter
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.coroutines.launch
@@ -50,6 +54,16 @@ class CategoryBottomSheetFragment : BottomSheetDialogFragment() {
         }
     )
 
+    private val soundViewModel by viewModels<SoundViewModel>(
+        factoryProducer = {
+            object : ViewModelProvider.Factory {
+                override fun <T : ViewModel> create(modelClass: Class<T>): T {
+                    return SoundViewModel(db.soundDAO()) as T
+                }
+            }
+        }
+    )
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -65,7 +79,13 @@ class CategoryBottomSheetFragment : BottomSheetDialogFragment() {
         val view = inflater.inflate(R.layout.fragment_category_bottom_sheet, container, false)
         recyclerView = view.findViewById(R.id.categories_recycler)
 
-        categoryAdapter = CategoryAdapter()
+        categoryAdapter = CategoryAdapter { selectedCategory ->
+            soundViewModel.onEvent(SoundEvent.SortSounds(SoundSortType.CATEGORY))
+            soundViewModel.onEvent(SoundEvent.FilterByCategory(selectedCategory.id))
+            dismiss()
+        }
+
+
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.adapter = categoryAdapter
 

@@ -14,9 +14,4 @@
         android:icon="@drawable/baseline_album_24"
         android:title="@string/sounds_title"/>
 
-    <item
-        android:id="@+id/favoritesFragment"
-        android:icon="@drawable/baseline_auto_awesome_24"
-        android:title="@string/favorites_title" />
-
 </menu>
