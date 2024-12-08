@@ -30,13 +30,15 @@ class CategoryViewModel (
             }
         }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(), emptyList())
     private val _state = MutableStateFlow(CategoryState())
+    /* state combina los valores de _state, _sortType y _categories.
+    Cuando uno de estos valos cambia se genera un nuevo valor de state */
     val state = combine(_state, _sortType, _categories) { state, sortType, categories ->
         state.copy(
             categories = categories,
             sortType = sortType
         )
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), CategoryState())
-
+    // Esta función identifica que tipo de evento se ha enviado y ejecutar una acción en función a ello.
     fun onEvent(event: CategoryEvent) {
         when(event) {
             is CategoryEvent.SaveCategory -> {

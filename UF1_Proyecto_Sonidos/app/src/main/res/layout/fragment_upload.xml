@@ -173,7 +173,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="start"
                 style="@style/CustomTitle"
-                android:text="@string/category_title"
+                android:text="@string/id_title"
                 android:layout_marginTop="10dp"/>
 
             <EditText

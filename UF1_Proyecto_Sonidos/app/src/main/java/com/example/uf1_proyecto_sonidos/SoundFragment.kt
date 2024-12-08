@@ -20,21 +20,15 @@ import com.example.uf1_proyecto_sonidos.data.view_models.SoundViewModel
 import com.example.uf1_proyecto_sonidos.ui.adapters.SoundsAdapter
 import com.google.android.material.slider.Slider
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [SoundFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class SoundFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
 
+    // Instancio la base de datos y el view model
     private val db by lazy {
         AppDatabase.getDatabase(requireContext().applicationContext)
     }
@@ -74,9 +68,9 @@ class SoundFragment : Fragment() {
         soundsRecyclerView.adapter = soundsAdapter
         filterByCategory = view.findViewById(R.id.filter_by_category_button)
 
+        // Actualiza la lista de sonidos en el RecyclerView cuando el estado cambia
         lifecycleScope.launchWhenStarted {
             soundViewModel.state.collect { state ->
-                Log.d("SoundFragment", "State updated with sounds: ${state.sounds.size} items")
                 soundsAdapter.updateSounds(state.sounds)
             }
         }
@@ -92,32 +86,12 @@ class SoundFragment : Fragment() {
             soundsAdapter.updateVolume(value)
         }
 
+        // Despliega el bottomSheetFragment
         filterByCategory.setOnClickListener {
             val bottomSheet = CategoryBottomSheetFragment()
             bottomSheet.show(parentFragmentManager, "CategoriesBottomSheet")
         }
 
         return view
-    }
-
-
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment SoundFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            SoundFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
     }
 }

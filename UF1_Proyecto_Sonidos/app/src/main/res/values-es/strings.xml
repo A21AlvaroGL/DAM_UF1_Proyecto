@@ -24,5 +24,6 @@
     <string name="data_uploaded_toast">Datos subidos</string>
     <string name="data_deleted_toast">Datos eliminados</string>
     <string name="empty_data_toast">Necesitas rellenar todos los campos</string>
+    <string name="id_title">ID</string>
     <string name="delete_sound_hint">Introduce el id…</string>
 </resources>

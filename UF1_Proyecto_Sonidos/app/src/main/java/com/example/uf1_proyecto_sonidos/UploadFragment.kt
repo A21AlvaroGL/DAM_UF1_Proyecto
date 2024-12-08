@@ -27,16 +27,9 @@ import com.example.uf1_proyecto_sonidos.data.events.SoundEvent
 import com.example.uf1_proyecto_sonidos.data.view_models.CategoryViewModel
 import com.example.uf1_proyecto_sonidos.data.view_models.SoundViewModel
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [UploadFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class UploadFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
@@ -143,39 +136,6 @@ class UploadFragment : Fragment() {
         }
     }
 
-    private fun addSound() {
-        soundPathButton.setOnClickListener {
-            openFile()
-        }
-
-        addSoundButton.setOnClickListener {
-            val soundName = soundNameEditText.text.toString()
-            val selectedCategoryPosition = soundCategorySpinner.selectedItemPosition
-            val categories = categoryViewModel.state.value.categories
-
-            if (soundName.isNotBlank() && selectedCategoryPosition >= 0 && ::soundPath.isInitialized && soundPath.isNotBlank()) {
-                if (categories.isNotEmpty()) {
-                    val selectedCategory = categories[selectedCategoryPosition]
-                    val soundCategoryId = selectedCategory.id
-
-                    soundViewModel.onEvent(
-                        SoundEvent.SaveSound(
-                            Sound(
-                                name = soundName,
-                                path = soundPath,
-                                category_id = soundCategoryId
-                            )
-                        )
-                    )
-                }
-                Toast.makeText(activity, getString(R.string.data_uploaded_toast), Toast.LENGTH_SHORT).show()
-                soundNameEditText.text.clear()
-            } else {
-                Toast.makeText(activity, getString(R.string.empty_data_toast), Toast.LENGTH_SHORT).show()
-            }
-        }
-    }
-
     private fun showForms() {
         // Configurar el radio group para que muestre unos formularios u otros
         formRadioGroup.setOnCheckedChangeListener { _, checkedId ->
@@ -192,16 +152,53 @@ class UploadFragment : Fragment() {
         }
     }
 
+    private fun addSound() {
+        soundPathButton.setOnClickListener {
+            openFile()
+        }
+
+        addSoundButton.setOnClickListener {
+            val soundName = soundNameEditText.text.toString()
+            val selectedCategoryPosition = soundCategorySpinner.selectedItemPosition
+            val categories = categoryViewModel.state.value.categories
+
+            if (soundName.isNotBlank() && selectedCategoryPosition >= 0 && ::soundPath.isInitialized && soundPath.isNotBlank()) {
+                if (categories.isNotEmpty()) {
+                    val selectedCategory = categories[selectedCategoryPosition]
+                    val soundCategoryId = selectedCategory.id
+
+                    // Envío el evento para añadir el sonido
+                    soundViewModel.onEvent(
+                        SoundEvent.SaveSound(
+                            Sound(
+                                name = soundName,
+                                path = soundPath,
+                                category_id = soundCategoryId
+                            )
+                        )
+                    )
+                }
+                // Creo un Toast para dar feedback al usuario
+                Toast.makeText(activity, getString(R.string.data_uploaded_toast), Toast.LENGTH_SHORT).show()
+                soundNameEditText.text.clear()
+            } else {
+                Toast.makeText(activity, getString(R.string.empty_data_toast), Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
     private fun addCategory() {
         addCategoryButton.setOnClickListener {
             val categoryName = categoryNameEditText.text.toString()
 
             if (categoryName.isNotBlank()) {
+                // Envío el evento para añadir la categoría
                 categoryViewModel.onEvent(
                     CategoryEvent.SaveCategory(
                         Category(name = categoryName)
                     )
                 )
+                // Creo un Toast para dar feedback al usuario
                 Toast.makeText(activity, getString(R.string.data_uploaded_toast), Toast.LENGTH_SHORT).show()
                 categoryNameEditText.text.clear()
             } else {
@@ -215,10 +212,12 @@ class UploadFragment : Fragment() {
             val soundId = deleteSoundEditText.text.toString()
             if (soundId != null) {
                 if (soundId.isNotBlank()) {
+                    // Envío el evento para borrar el sonido
                     soundViewModel.onEvent(
                         SoundEvent.DeleteSoundById(soundId.toInt())
                     )
                 }
+                // Creo un Toast para dar feedback al usuario
                 Toast.makeText(activity, getString(R.string.data_deleted_toast), Toast.LENGTH_SHORT).show()
             } else {
                 Toast.makeText(activity, getString(R.string.empty_data_toast), Toast.LENGTH_SHORT).show()
@@ -229,17 +228,21 @@ class UploadFragment : Fragment() {
 
     private fun deleteCategory() {
         deleteCategoryButton.setOnClickListener {
+            // Obtengo la lista de categorías
             val categories = categoryViewModel.state.value.categories
             val selectedCategoryPosition = deleteCategorySpinner.selectedItemPosition
 
             if (categories.isNotEmpty() && selectedCategoryPosition >= 0) {
                 val selectedCategory = categories[selectedCategoryPosition]
 
+                // Envío el evento para borrar la categoría
                 categoryViewModel.onEvent(
                     CategoryEvent.DeleteCategory(
                         selectedCategory
                     )
                 )
+
+                // Creo un Toast para dar feedback al usuario
                 Toast.makeText(activity, getString(R.string.data_deleted_toast), Toast.LENGTH_SHORT).show()
             } else {
                 Toast.makeText(activity, getString(R.string.empty_data_toast), Toast.LENGTH_SHORT).show()
@@ -247,6 +250,7 @@ class UploadFragment : Fragment() {
         }
     }
 
+    // Abre el selector de archivos para que el usuario elija un sonido
     fun openFile() {
         val intent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
             addCategory(Intent.CATEGORY_OPENABLE)
@@ -256,6 +260,7 @@ class UploadFragment : Fragment() {
         startActivityForResult(intent, PICK_SOUND_FILE)
     }
 
+    // Maneja la selección de sonidos asegurándose de que la aplicación tiene permisos para acceder al él.
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
@@ -266,6 +271,7 @@ class UploadFragment : Fragment() {
                 val resolver = requireContext().contentResolver
                 val flags = Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_GRANT_WRITE_URI_PERMISSION
                 try {
+                    // Es necesario pedir permisos persistentes o si al reiniciar la app se pierden
                     resolver.takePersistableUriPermission(uri, flags)
                 } catch (e: Exception) {
                     Log.e("UploadFragment", "Unable to take URI permission: $uri", e)

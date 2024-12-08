@@ -21,16 +21,9 @@ import com.example.uf1_proyecto_sonidos.ui.adapters.CategoryAdapter
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.coroutines.launch
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [CategoryBottomSheetFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class CategoryBottomSheetFragment : BottomSheetDialogFragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
@@ -39,6 +32,7 @@ class CategoryBottomSheetFragment : BottomSheetDialogFragment() {
     private lateinit var categoryAdapter: CategoryAdapter
     private lateinit var recyclerView: RecyclerView
 
+    // Instancio la base de datos y los view model
     private val db by lazy {
         AppDatabase.getDatabase(requireContext().applicationContext)
     }
@@ -79,41 +73,23 @@ class CategoryBottomSheetFragment : BottomSheetDialogFragment() {
         val view = inflater.inflate(R.layout.fragment_category_bottom_sheet, container, false)
         recyclerView = view.findViewById(R.id.categories_recycler)
 
+        // Configuro el adaptador para manejar la selección de categorías
         categoryAdapter = CategoryAdapter { selectedCategory ->
             soundViewModel.onEvent(SoundEvent.SortSounds(SoundSortType.CATEGORY))
             soundViewModel.onEvent(SoundEvent.FilterByCategory(selectedCategory.id))
+            // Cierro el fragmento una vez seleccionada la categoría
             dismiss()
         }
-
 
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.adapter = categoryAdapter
 
+        // Observo los cambios en el estado de las categorías y actualizo el adaptador
         lifecycleScope.launchWhenStarted {
             categoryViewModel.state.collect { state ->
                 categoryAdapter.updateCategories(state.categories)
             }
         }
         return view
-    }
-
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment CategoryBottomSheetFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            CategoryBottomSheetFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
     }
 }

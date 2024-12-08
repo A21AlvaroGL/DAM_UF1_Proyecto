@@ -30,6 +30,7 @@ class SoundsViewHolder(soundButtonView: View, soundFragmentView: View) : Recycle
             playSound(uri, speed, volume)
         }
 
+        // Muestra un Toast con el id del sonido para así saber cúal es en el caso de querer borrarlo
         soundButton.setOnLongClickListener {
             val context = itemView.context
             Toast.makeText(context, "ID: ${sound.id}", Toast.LENGTH_SHORT).show()
